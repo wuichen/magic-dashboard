@@ -1,5 +1,5 @@
 import auth from '../utils/auth'
-import prisma from 'src/server/context/prisma'
+import prisma from 'server/context/prisma'
 
 export default async function loginComplete(req, res) {
   try {

@@ -1,9 +1,9 @@
 // layouts
-import MainLayout from "src/layouts/main";
+import MainLayout from 'layouts/main';
 // material
-import { experimentalStyled as styled } from "@material-ui/core/styles";
+import { experimentalStyled as styled } from '@material-ui/core/styles';
 // components
-import Page from "src/components/Page";
+import Page from 'components/Page';
 import {
   LandingHero,
   LandingMinimal,
@@ -11,17 +11,18 @@ import {
   LandingAdvertisement,
   LandingCleanInterfaces,
   LandingHugePackElements,
-} from "src/components/_external-pages/landing";
+} from 'components/_external-pages/landing';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 // ----------------------------------------------------------------------
 
 const RootStyle = styled(Page)({
-  height: "100%",
+  height: '100%',
 });
 
-const ContentStyle = styled("div")(({ theme }) => ({
-  overflow: "hidden",
-  position: "relative",
+const ContentStyle = styled('div')(({ theme }) => ({
+  overflow: 'hidden',
+  position: 'relative',
   backgroundColor: theme.palette.background.default,
 }));
 
@@ -30,10 +31,7 @@ const ContentStyle = styled("div")(({ theme }) => ({
 export default function LandingPage() {
   return (
     <MainLayout>
-      <RootStyle
-        title="The starting point for your next project | Minimal-UI"
-        id="move_top"
-      >
+      <RootStyle title="The starting point for your next project | Minimal-UI" id="move_top">
         <LandingHero />
         <ContentStyle>
           <LandingMinimal />
@@ -46,3 +44,11 @@ export default function LandingPage() {
     </MainLayout>
   );
 }
+
+export const getStaticProps = async ({ locale }: any) => {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ['common', 'forms', 'menu', 'footer', 'admin'])),
+    },
+  };
+};

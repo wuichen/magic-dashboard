@@ -1,6 +1,10 @@
+// import { Link as RouterLink } from 'react-router-dom';
+import NextLink from 'next/link';
 // material
 import { alpha, useTheme, experimentalStyled as styled } from '@material-ui/core/styles';
 import { Box, Grid, Button, Container, Typography } from '@material-ui/core';
+// routes
+import { PATH_PAGE } from '../../../routes/paths';
 //
 import { varFadeInUp, MotionInView } from '../../animate';
 
@@ -10,10 +14,8 @@ const RootStyle = styled('div')(({ theme }) => ({
   padding: theme.spacing(24, 0),
   backgroundImage:
     theme.palette.mode === 'light'
-      ? `linear-gradient(180deg, ${alpha(theme.palette.grey[300], 0)} 0%, ${
-          theme.palette.grey[300]
-        } 100%)`
-      : 'none'
+      ? `linear-gradient(180deg, ${alpha(theme.palette.grey[300], 0)} 0%, ${theme.palette.grey[300]} 100%)`
+      : 'none',
 }));
 
 const ContentStyle = styled('div')(({ theme }) => ({
@@ -22,8 +24,8 @@ const ContentStyle = styled('div')(({ theme }) => ({
   marginBottom: theme.spacing(10),
   [theme.breakpoints.up('md')]: {
     textAlign: 'left',
-    marginBottom: 0
-  }
+    marginBottom: 0,
+  },
 }));
 
 const ScreenStyle = styled(MotionInView)(({ theme }) => ({
@@ -35,14 +37,14 @@ const ScreenStyle = styled(MotionInView)(({ theme }) => ({
   [theme.breakpoints.up('sm')]: {
     maxWidth: 320,
     paddingRight: 4,
-    borderRadius: 12
+    borderRadius: 12,
   },
   '& img': {
     borderRadius: 8,
     [theme.breakpoints.up('sm')]: {
-      borderRadius: 12
-    }
-  }
+      borderRadius: 12,
+    },
+  },
 }));
 
 const COMMON = {
@@ -52,20 +54,20 @@ const COMMON = {
   scaleY: 1,
   translateX: 0,
   translateY: 0,
-  opacity: 0
+  opacity: 0,
 };
 
 const variantScreenLeft = {
   initial: COMMON,
-  animate: { ...COMMON, translateX: '-50%', translateY: 40, opacity: 1 }
+  animate: { ...COMMON, translateX: '-50%', translateY: 40, opacity: 1 },
 };
 const variantScreenCenter = {
   initial: COMMON,
-  animate: { ...COMMON, opacity: 1 }
+  animate: { ...COMMON, opacity: 1 },
 };
 const variantScreenRight = {
   initial: COMMON,
-  animate: { ...COMMON, translateX: '50%', translateY: -40, opacity: 1 }
+  animate: { ...COMMON, translateX: '50%', translateY: -40, opacity: 1 },
 };
 
 // ----------------------------------------------------------------------
@@ -86,11 +88,7 @@ export default function LandingHugePackElements() {
           <Grid item xs={12} md={4} sx={{ display: 'flex', alignItems: 'center' }}>
             <ContentStyle>
               <MotionInView variants={varFadeInUp}>
-                <Typography
-                  component="p"
-                  variant="overline"
-                  sx={{ mb: 2, color: 'text.secondary' }}
-                >
+                <Typography component="p" variant="overline" sx={{ mb: 2, color: 'text.secondary' }}>
                   Interface Starter Kit
                 </Typography>
               </MotionInView>
@@ -106,18 +104,19 @@ export default function LandingHugePackElements() {
                 <Typography
                   sx={{
                     mb: 5,
-                    color: isLight ? 'text.secondary' : 'common.white'
+                    color: isLight ? 'text.secondary' : 'common.white',
                   }}
                 >
-                  We collected most popular elements. Menu, sliders, buttons, inputs etc. are all
-                  here. Just dive in!
+                  We collected most popular elements. Menu, sliders, buttons, inputs etc. are all here. Just dive in!
                 </Typography>
               </MotionInView>
 
               <MotionInView variants={varFadeInUp}>
-                <Button size="large" color="inherit" variant="outlined">
-                  View All Components
-                </Button>
+                <NextLink href={PATH_PAGE.components}>
+                  <Button size="large" color="inherit" variant="outlined">
+                    View All Components
+                  </Button>
+                </NextLink>
               </MotionInView>
             </ContentStyle>
           </Grid>
@@ -128,7 +127,7 @@ export default function LandingHugePackElements() {
                 display: 'flex',
                 alignItems: 'center',
                 position: 'relative',
-                justifyContent: 'center'
+                justifyContent: 'center',
               }}
             >
               {[...Array(3)].map((_, index) => (
@@ -138,24 +137,24 @@ export default function LandingHugePackElements() {
                   variants={{
                     ...(index === 0 && screenLeftAnimate),
                     ...(index === 1 && screenCenterAnimate),
-                    ...(index === 2 && screenRightAnimate)
+                    ...(index === 2 && screenRightAnimate),
                   }}
                   transition={{ duration: 0.72, ease: 'easeOut' }}
                   sx={{
                     boxShadow: `${isRTL ? -80 : 80}px -40px 80px ${alpha(
                       isLight ? theme.palette.grey[600] : theme.palette.common.black,
-                      0.48
+                      0.48,
                     )}`,
                     ...(index === 0 && {
                       zIndex: 3,
-                      position: 'absolute'
+                      position: 'absolute',
                     }),
                     ...(index === 1 && { zIndex: 2 }),
                     ...(index === 2 && {
                       zIndex: 1,
                       position: 'absolute',
-                      boxShadow: 'none'
-                    })
+                      boxShadow: 'none',
+                    }),
                   }}
                 >
                   <img

@@ -1,10 +1,10 @@
 import { ReactNode } from 'react';
 // import { Navigate } from 'react-router-dom';
 // hooks
-import useAuth from '../hooks/useAuth';
+import { useAuth } from 'magic/components/AuthProvider';
 // routes
 import { PATH_ADMIN } from '../routes/paths';
-import { useRouter } from 'next/router';
+// import { useRouter } from 'next/router';
 // ----------------------------------------------------------------------
 
 type GuestGuardProps = {
@@ -12,9 +12,9 @@ type GuestGuardProps = {
 };
 
 export default function GuestGuard({ children }: GuestGuardProps) {
-  const { isAuthenticated } = useAuth();
-  const { push } = useRouter();
-  if (isAuthenticated) {
+  const { isLoggedIn } = useAuth();
+  // const { push } = useRouter();
+  if (isLoggedIn) {
     // push(PATH_ADMIN.root);
     window.location.replace(PATH_ADMIN.root);
     // return <Navigate to={PATH_DASHBOARD.root} />;

@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import Button from './Button';
 import { useAuth } from './AuthProvider';
-// import graphql from 'src/client/graphql/queries';
+// import graphql from 'client/graphql/queries';
 import { useQuery } from 'react-query';
 
 import styles from '../styles/Login.module.css';

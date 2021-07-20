@@ -1,10 +1,10 @@
 import { useState, ReactNode, useEffect } from 'react';
 // import { Navigate, useLocation } from 'react-router-dom';
 // hooks
-import useAuth from '../hooks/useAuth';
+import { useAuth } from 'magic/components/AuthProvider';
 import { useRouter } from 'next/router';
 import { PATH_AUTH, PATH_ADMIN } from 'routes/paths';
-import data from '@iconify/icons-ic/round-format-clear';
+// import data from '@iconify/icons-ic/round-format-clear';
 import { usePermissionQuery } from 'generated';
 // pages
 // import Login from '../pages/authentication/Login';
@@ -16,15 +16,15 @@ type AuthGuardProps = {
 };
 
 export default function AuthGuard({ children }: AuthGuardProps) {
-  const { isAuthenticated } = useAuth();
+  const { isLoggedIn, init } = useAuth();
   const { push, pathname } = useRouter();
   const [requestedLocation, setRequestedLocation] = useState<string | null>(null);
   const { data } = usePermissionQuery();
-  if (!isAuthenticated) {
+  if (!isLoggedIn && init) {
     if (pathname !== requestedLocation) {
       setRequestedLocation(pathname);
     }
-    push(PATH_AUTH.login);
+    push(PATH_AUTH.passwordless);
     // return <Login />;
   }
 
@@ -36,11 +36,7 @@ export default function AuthGuard({ children }: AuthGuardProps) {
 
   useEffect(() => {
     const adminRoute = pathname?.replace(PATH_ADMIN.root + '/', '').split('/')[0];
-    if (
-      isAuthenticated &&
-      typeof data?.permission?.admin === typeof adminRoute &&
-      data?.permission?.admin !== adminRoute
-    ) {
+    if (isLoggedIn && typeof data?.permission?.admin === typeof adminRoute && data?.permission?.admin !== adminRoute) {
       window.location.replace(PATH_ADMIN.root);
     }
   }, [data]);

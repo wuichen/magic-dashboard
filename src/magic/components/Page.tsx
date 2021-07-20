@@ -1,7 +1,7 @@
 import * as React from 'react';
 import useWindowHeight from '../hooks/useWindowHeight';
 
-import styles from 'src/magic/styles/Page.module.css';
+import styles from 'magic/styles/Page.module.css';
 
 export default function Page({ children, className, innerRef, forceWindowHeight, ...restProps }) {
   const pageRef = React.useRef();

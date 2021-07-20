@@ -1,4 +1,4 @@
-import { PATH_DASHBOARD } from 'src/routes/paths';
+import { PATH_DASHBOARD } from 'routes/paths';
 
 // ----------------------------------------------------------------------
 
@@ -12,7 +12,7 @@ export const getServerSideProps = () => {
   return {
     redirect: {
       destination: PATH_DASHBOARD.general.pageOne,
-      permanent: false
-    }
+      permanent: false,
+    },
   };
 };

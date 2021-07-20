@@ -1,14 +1,14 @@
-import { ReactNode } from "react";
-import { Link as ScrollLink } from "react-scroll";
+import { ReactNode } from 'react';
+import { Link as ScrollLink } from 'react-scroll';
 // next
-import { useRouter } from "next/router";
+import { useRouter } from 'next/router';
 // material
-import { Box, Link, Container, Typography } from "@material-ui/core";
+import { Box, Link, Container, Typography } from '@material-ui/core';
 // components
-import Logo from "../../components/Logo";
+import Logo from '../../components/Logo';
 //
-import MainFooter from "./MainFooter";
-import MainNavbar from "./MainNavbar";
+import MainFooter from './MainFooter';
+import MainNavbar from './MainNavbar';
 
 // ----------------------------------------------------------------------
 
@@ -18,7 +18,7 @@ type MainLayoutProps = {
 
 export default function MainLayout({ children }: MainLayoutProps) {
   const { pathname } = useRouter();
-  const isHome = pathname === "/";
+  const isHome = pathname === '/';
 
   return (
     <>
@@ -31,14 +31,14 @@ export default function MainLayout({ children }: MainLayoutProps) {
         <Box
           sx={{
             py: 5,
-            textAlign: "center",
-            position: "relative",
-            bgcolor: "background.default",
+            textAlign: 'center',
+            position: 'relative',
+            bgcolor: 'background.default',
           }}
         >
           <Container maxWidth="lg">
             <ScrollLink to="move_top" spy smooth>
-              <Logo sx={{ mb: 1, mx: "auto", cursor: "pointer" }} />
+              <Logo sx={{ mb: 1, mx: 'auto', cursor: 'pointer' }} />
             </ScrollLink>
 
             <Typography variant="caption" component="p">

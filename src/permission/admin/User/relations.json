@@ -1,0 +1,57 @@
+[
+  {
+    "model": "User",
+    "parent": null,
+    "name": "undefined.User"
+  },
+  {
+    "model": "Image",
+    "parent": "User",
+    "name": "User.Image"
+  },
+  {
+    "model": "Collection",
+    "parent": "User",
+    "name": "User.Collection"
+  },
+  {
+    "model": "Audio",
+    "parent": "User",
+    "name": "User.Audio"
+  },
+  {
+    "model": "Video",
+    "parent": "User",
+    "name": "User.Video"
+  },
+  {
+    "model": "Post",
+    "parent": "User",
+    "name": "User.Post"
+  },
+  {
+    "model": "DigitalProduct",
+    "parent": "User",
+    "name": "User.DigitalProduct"
+  },
+  {
+    "model": "Inquiry",
+    "parent": "User",
+    "name": "User.Inquiry"
+  },
+  {
+    "model": "Message",
+    "parent": "Inquiry",
+    "name": "Inquiry.Message"
+  },
+  {
+    "model": "Tag",
+    "parent": "Collection",
+    "name": "Collection.Tag"
+  },
+  {
+    "model": "Notification",
+    "parent": "User",
+    "name": "User.Notification"
+  }
+]

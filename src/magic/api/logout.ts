@@ -1,8 +1,8 @@
 // import gql from 'graphql-tag';
 
-import auth from 'src/magic/utils/auth';
-import prisma from 'src/server/context/prisma'
-// import graphql from 'src/server/graphql';
+import auth from 'magic/utils/auth';
+import prisma from 'server/context/prisma'
+// import graphql from 'server/graphql';
 
 export default async function logout(req, res) {
   try {

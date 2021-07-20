@@ -1,0 +1,82 @@
+[
+  {
+    "model": "User",
+    "parent": null,
+    "name": "undefined.User"
+  },
+  {
+    "model": "Story",
+    "parent": "Collection",
+    "name": "Collection.Story"
+  },
+  {
+    "model": "DigitalProduct",
+    "parent": "Collection",
+    "name": "Collection.DigitalProduct"
+  },
+  {
+    "model": "Video",
+    "parent": "User",
+    "name": "User.Video"
+  },
+  {
+    "model": "Audio",
+    "parent": "User",
+    "name": "User.Audio"
+  },
+  {
+    "model": "Image",
+    "parent": "User",
+    "name": "User.Image"
+  },
+  {
+    "model": "Message",
+    "parent": "Inquiry",
+    "name": "Inquiry.Message"
+  },
+  {
+    "model": "Order",
+    "parent": "Collection",
+    "name": "Collection.Order"
+  },
+  {
+    "model": "Customer",
+    "parent": "Collection",
+    "name": "Collection.Customer"
+  },
+  {
+    "model": "Inquiry",
+    "parent": "Story",
+    "name": "Story.Inquiry"
+  },
+  {
+    "model": "Link",
+    "parent": "Story",
+    "name": "Story.Link"
+  },
+  {
+    "model": "Collection",
+    "parent": "User",
+    "name": "User.Collection"
+  },
+  {
+    "model": "Post",
+    "parent": "User",
+    "name": "User.Post"
+  },
+  {
+    "model": "Tag",
+    "parent": "Collection",
+    "name": "Collection.Tag"
+  },
+  {
+    "model": "OrderedProduct",
+    "parent": "Order",
+    "name": "Order.OrderedProduct"
+  },
+  {
+    "model": "Notification",
+    "parent": "Collection",
+    "name": "Collection.Notification"
+  }
+]

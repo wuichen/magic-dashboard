@@ -1,4 +1,4 @@
-import prisma from 'src/server/context/prisma';
+import prisma from 'server/context/prisma';
 
 export default async function loginConfirm(req, res) {
   try {

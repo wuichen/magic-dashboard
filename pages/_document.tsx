@@ -1,34 +1,25 @@
-import React from "react";
+import React from 'react';
 // material
-import { ServerStyleSheets } from "@material-ui/styles";
+import { ServerStyleSheets } from '@material-ui/styles';
 // next
-import Document, { Html, Head, Main, NextScript } from "next/document";
+import Document, { Html, Head, Main, NextScript } from 'next/document';
+import { i18n } from 'next-i18next';
 
 // ----------------------------------------------------------------------
 
 class MyDocument extends Document {
   render() {
+    const { locale } = this.props.__NEXT_DATA__;
+    if (process.env.NODE_ENV !== 'production') {
+      i18n!.reloadResources(locale);
+    }
     return (
       <Html>
         <Head>
           <meta charSet="utf-8" />
-          <link
-            rel="apple-touch-icon"
-            sizes="180x180"
-            href="/favicon/apple-touch-icon.png"
-          />
-          <link
-            rel="icon"
-            type="image/png"
-            sizes="32x32"
-            href="/favicon/favicon-32x32.png"
-          />
-          <link
-            rel="icon"
-            type="image/png"
-            sizes="16x16"
-            href="/favicon/favicon-16x16.png"
-          />
+          <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
+          <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png" />
+          <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png" />
 
           <meta name="theme-color" content="#000000" />
           <link rel="manifest" href="/manifest.json" />
@@ -43,10 +34,7 @@ class MyDocument extends Document {
             name="description"
             content="The starting point for your next project with Minimal UI Kit, built on the newest version of Material-UI ©, ready to be customized to your style"
           />
-          <meta
-            name="keywords"
-            content="react,material,kit,application,dashboard,admin,template"
-          />
+          <meta name="keywords" content="react,material,kit,application,dashboard,admin,template" />
           <meta name="author" content="Minimal UI Kit" />
         </Head>
         <body>
@@ -97,10 +85,7 @@ MyDocument.getInitialProps = async (ctx) => {
   return {
     ...initialProps,
     // Styles fragment is rendered after the app and page rendering finish.
-    styles: [
-      ...React.Children.toArray(initialProps.styles),
-      sheets.getStyleElement(),
-    ],
+    styles: [...React.Children.toArray(initialProps.styles), sheets.getStyleElement()],
   };
 };
 

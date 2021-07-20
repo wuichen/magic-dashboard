@@ -9,7 +9,7 @@ import random from './random';
 import request from './request';
 import { getPhraseFromToken } from './words';
 
-// import roles from 'src/shared/roles';
+// import roles from 'shared/roles';
 
 // const JwtFields = {
 //   HasuraNamespace: 'https://hasura.io/jwt/claims',

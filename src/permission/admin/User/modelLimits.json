@@ -1,0 +1,47 @@
+[
+  {
+    "adminId": 110,
+    "createdAt": "2021-07-17T12:24:02.089Z",
+    "currency": "USD",
+    "currencyCode": null,
+    "deleted": null,
+    "deletedAt": null,
+    "id": 136,
+    "interval": "month",
+    "name": "Community",
+    "price": 0,
+    "stripePriceId": "prod_IXVAqfloIZ9cvS",
+    "updatedAt": "2021-07-17T12:24:02.089Z",
+    "modelLimits": []
+  },
+  {
+    "adminId": 110,
+    "createdAt": "2021-07-17T12:24:02.093Z",
+    "currency": "USD",
+    "currencyCode": null,
+    "deleted": null,
+    "deletedAt": null,
+    "id": 137,
+    "interval": "month",
+    "name": "Private",
+    "price": 20,
+    "stripePriceId": "price_1HwQ9TIKeSKTkSHCK9HnokRW",
+    "updatedAt": "2021-07-17T12:24:02.094Z",
+    "modelLimits": []
+  },
+  {
+    "adminId": 110,
+    "createdAt": "2021-07-17T12:24:02.098Z",
+    "currency": "USD",
+    "currencyCode": null,
+    "deleted": null,
+    "deletedAt": null,
+    "id": 138,
+    "interval": "month",
+    "name": "Super",
+    "price": 30,
+    "stripePriceId": "price_1IvEdTIKeSKTkSHCkfgXYwIx",
+    "updatedAt": "2021-07-17T12:24:02.099Z",
+    "modelLimits": []
+  }
+]

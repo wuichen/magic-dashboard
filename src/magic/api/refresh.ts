@@ -1,5 +1,5 @@
-import prisma from 'src/server/context/prisma';
-import auth from 'src/magic/utils/auth';
+import prisma from 'server/context/prisma';
+import auth from 'magic/utils/auth';
 
 export default async function loginRefresh(req, res) {
   try {

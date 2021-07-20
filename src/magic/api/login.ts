@@ -1,12 +1,12 @@
 import Joi from 'joi';
-import auth from 'src/magic/utils/auth';
-import request from 'src/magic/utils/request';
-import prisma from 'src/server/context/prisma';
-import config from 'src/magic/utils/config';
-import serverEmail from 'src/magic/utils/email';
-import loginConfirmEmail from 'src/magic/utils/emailTemplates/loginConfirmEmail';
-// import words from 'src/server/magic/utils/words';
-import { expiresMinutesDuration } from 'src/magic/utils/time';
+import auth from 'magic/utils/auth';
+import request from 'magic/utils/request';
+import prisma from 'server/context/prisma';
+import config from 'magic/utils/config';
+import serverEmail from 'magic/utils/email';
+import loginConfirmEmail from 'magic/utils/emailTemplates/loginConfirmEmail';
+// import words from 'server/magic/utils/words';
+import { expiresMinutesDuration } from 'magic/utils/time';
 
 // schema for validating username and password
 const schema = Joi.object({

@@ -1,13 +1,26 @@
-import Login from 'src/magic/components/Login';
+import * as React from 'react';
+import Magic from 'views/authentication/Magic';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import GuestGuard from 'guards/GuestGuard';
 import dynamic from 'next/dynamic';
 
-const DynamicModalContainer = dynamic(() => import('src/magic/components/Modal/ModalContainer'));
+const DynamicModalContainer = dynamic(() => import('magic/components/Modal/ModalContainer'));
 
-export default function LoginPage() {
+const LoginPage = ({}) => {
   return (
-    <>
-      <Login />
+    <GuestGuard>
+      <Magic />
       <DynamicModalContainer />
-    </>
+    </GuestGuard>
   );
-}
+};
+
+export const getStaticProps = async ({ locale }: any) => {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ['common', 'forms', 'menu', 'footer', 'admin'])),
+    },
+  };
+};
+
+export default LoginPage;

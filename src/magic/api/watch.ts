@@ -1,4 +1,4 @@
-import prisma from 'src/server/context/prisma';
+import prisma from 'server/context/prisma';
 import jwt from 'jsonwebtoken';
 import config from '../utils/config';
 

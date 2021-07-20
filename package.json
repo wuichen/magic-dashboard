@@ -20,6 +20,11 @@
     "ts-node": "ts-node -r tsconfig-paths/register --compiler-options '{\"module\":\"CommonJS\"}'"
   },
   "dependencies": {
+    "yup": "^0.32.9",
+    "notistack": "^1.0.6-next.1",
+    "next-pwa": "^5.2.24",
+    "next-i18next": "^8.5.5",
+    "formik": "^2.2.9",
     "js-cookie": "^3.0.0-rc.4",
     "react-query": "^3.19.0",
     "@sendgrid/mail": "^7.4.5",

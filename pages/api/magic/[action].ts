@@ -1,9 +1,9 @@
-import confirm from 'src/magic/api/confirm';
-import login from 'src/magic/api/login';
-import logout from 'src/magic/api/logout';
-import complete from 'src/magic/api/complete';
-import refresh from 'src/magic/api/refresh';
-import watch from 'src/magic/api/watch';
+import confirm from 'magic/api/confirm';
+import login from 'magic/api/login';
+import logout from 'magic/api/logout';
+import complete from 'magic/api/complete';
+import refresh from 'magic/api/refresh';
+import watch from 'magic/api/watch';
 
 export default async function magicRoutes(req, res) {
   const { action } = req.query;

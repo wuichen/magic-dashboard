@@ -5,7 +5,7 @@ import Page from './Page';
 import Button from './Button';
 import { useAuth } from './AuthProvider';
 
-import styles from 'src/magic/styles/Login.module.css';
+import styles from 'magic/styles/Login.module.css';
 
 LoginPage.title = 'Login';
 

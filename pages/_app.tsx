@@ -7,23 +7,26 @@ import { useEffect, useRef } from 'react';
 import Head from 'next/head';
 import type { AppProps } from 'next/app';
 // theme
-import ThemeConfig from 'src/theme';
+import ThemeConfig from 'theme';
 // contexts
-import { SettingsProvider } from 'src/contexts/SettingsContext';
+import { SettingsProvider } from 'contexts/SettingsContext';
 // components
-import RtlLayout from 'src/components/RtlLayout';
-import Settings from 'src/components/settings';
-import TopProgressBar from 'src/components/TopProgressBar';
-import ThemePrimaryColor from 'src/components/ThemePrimaryColor';
-import { useApollo } from 'src/server/client';
+import RtlLayout from 'components/RtlLayout';
+import Settings from 'components/settings';
+import TopProgressBar from 'components/TopProgressBar';
+import ThemePrimaryColor from 'components/ThemePrimaryColor';
+import { useApollo } from 'server/client';
 import { ApolloProvider } from '@apollo/client';
-import { AuthProvider } from 'src/magic/components/AuthProvider';
-import { ModalContextProvider } from 'src/magic/components/Modal';
+import { AuthProvider } from 'magic/components/AuthProvider';
+import { ModalContextProvider } from 'magic/components/Modal';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import NotistackProvider from 'components/NotistackProvider';
+import { appWithTranslation } from 'next-i18next';
+import 'magic/styles/globals.css';
 
 // ----------------------------------------------------------------------
 
-export default function MyApp({ Component, pageProps }: AppProps) {
+function MyApp({ Component, pageProps }: AppProps) {
   const apolloClient = useApollo(pageProps.initialApolloState);
   const queryClientRef = useRef<any>();
   if (!queryClientRef.current) {
@@ -46,12 +49,14 @@ export default function MyApp({ Component, pageProps }: AppProps) {
               <ThemeConfig>
                 <ThemePrimaryColor>
                   <RtlLayout>
-                    <Settings />
-                    <Head>
-                      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-                    </Head>
-                    <TopProgressBar />
-                    <Component {...pageProps} />
+                    <NotistackProvider>
+                      <Settings />
+                      <Head>
+                        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+                      </Head>
+                      <TopProgressBar />
+                      <Component {...pageProps} />
+                    </NotistackProvider>
                   </RtlLayout>
                 </ThemePrimaryColor>
               </ThemeConfig>
@@ -62,3 +67,5 @@ export default function MyApp({ Component, pageProps }: AppProps) {
     </QueryClientProvider>
   );
 }
+
+export default appWithTranslation(MyApp);
