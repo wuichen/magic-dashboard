@@ -1,0 +1,77 @@
+fragment RefreshTokenFields on RefreshToken {
+  loginTokenId
+  userId
+  createdAt
+  expires
+  value
+  lastActive
+  ip
+  userAgent
+  userAgentRaw
+  geo
+}
+
+fragment RefreshToken on RefreshToken {
+  ...RefreshTokenFields
+  user {
+    ...UserFields
+  }
+}
+
+query findUniqueRefreshToken($where: RefreshTokenWhereUniqueInput!) {
+  findUniqueRefreshToken(where: $where) {
+    ...RefreshToken
+  }
+}
+
+query findManyRefreshToken(
+  $where: RefreshTokenWhereInput
+  $orderBy: [RefreshTokenOrderByInput!]
+  $cursor: RefreshTokenWhereUniqueInput
+  $skip: Int
+  $take: Int
+) {
+  findManyRefreshToken(where: $where, orderBy: $orderBy, cursor: $cursor, skip: $skip, take: $take) {
+    ...RefreshToken
+  }
+}
+
+query findManyRefreshTokenCount(
+  $where: RefreshTokenWhereInput
+  $orderBy: [RefreshTokenOrderByInput!]
+  $cursor: RefreshTokenWhereUniqueInput
+  $skip: Int
+  $take: Int
+) {
+  findManyRefreshTokenCount(where: $where, orderBy: $orderBy, cursor: $cursor, skip: $skip, take: $take)
+}
+
+mutation createOneRefreshToken($data: RefreshTokenCreateInput!) {
+  createOneRefreshToken(data: $data) {
+    ...RefreshToken
+  }
+}
+
+mutation updateOneRefreshToken($where: RefreshTokenWhereUniqueInput!, $data: RefreshTokenUpdateInput!) {
+  updateOneRefreshToken(where: $where, data: $data) {
+    ...RefreshToken
+  }
+}
+
+mutation deleteOneRefreshToken($where: RefreshTokenWhereUniqueInput!) {
+  deleteOneRefreshToken(where: $where) {
+    ...RefreshToken
+  }
+}
+
+mutation deleteManyRefreshToken($where: RefreshTokenWhereInput) {
+  deleteManyRefreshToken(where: $where) {
+    count
+  }
+}
+
+mutation updateManyRefreshToken($where: RefreshTokenWhereInput, $data: RefreshTokenUpdateManyMutationInput!) {
+  updateManyRefreshToken(where: $where, data: $data) {
+    count
+  }
+}

@@ -1,0 +1,50 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["referentialActions", "nApi"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            Int            @id @default(autoincrement())
+  email         String         @unique
+  name          String?
+  password      String?
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  refreshTokens RefreshToken[]
+  loginTokens   LoginToken[]
+}
+
+model LoginToken {
+  id           Int      @id @default(autoincrement())
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  userId       Int
+  approved     Boolean  @default(false)
+  expires      DateTime
+  createdAt    DateTime @default(now())
+  email        String
+  secret       String
+  ip           String
+  userAgent    String
+  userAgentRaw String
+  geo          Json
+  domain       String
+}
+
+model RefreshToken {
+  loginTokenId Int      @id
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  userId       Int
+  createdAt    DateTime @default(now())
+  expires      DateTime
+  value        String
+  lastActive   DateTime @default(now())
+  ip           String
+  userAgent    String
+  userAgentRaw String
+  geo          Json
+}
