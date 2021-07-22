@@ -20,6 +20,10 @@
     "ts-node": "ts-node -r tsconfig-paths/register --compiler-options '{\"module\":\"CommonJS\"}'"
   },
   "dependencies": {
+    "react-dropzone": "^11.3.4",
+    "react-image-lightbox": "^5.1.4",
+    "@reduxjs/toolkit": "^1.6.1",
+    "react-beautiful-dnd": "^13.1.0",
     "yup": "^0.32.9",
     "notistack": "^1.0.6-next.1",
     "next-pwa": "^5.2.24",

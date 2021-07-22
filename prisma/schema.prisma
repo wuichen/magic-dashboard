@@ -48,3 +48,24 @@ model RefreshToken {
   userAgentRaw String
   geo          Json
 }
+
+model Collection {
+  id          Int    @id @default(autoincrement())
+  name        String
+  description String
+  doImage     Json?
+}
+
+model Story {
+  id          Int    @id @default(autoincrement())
+  name        String
+  description String
+  doImage     Json?
+}
+
+model Item {
+  id          Int    @id @default(autoincrement())
+  name        String
+  description String
+  doImage     Json?
+}

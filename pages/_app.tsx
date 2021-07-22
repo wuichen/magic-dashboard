@@ -23,6 +23,10 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import NotistackProvider from 'components/NotistackProvider';
 import { appWithTranslation } from 'next-i18next';
 import 'magic/styles/globals.css';
+import { Provider as ReduxProvider } from 'react-redux';
+import { store } from 'redux/store';
+import AdapterDateFns from '@material-ui/lab/AdapterDateFns';
+import LocalizationProvider from '@material-ui/lab/LocalizationProvider';
 
 // ----------------------------------------------------------------------
 
@@ -42,28 +46,32 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <QueryClientProvider client={queryClientRef.current}>
-      <ApolloProvider client={apolloClient}>
-        <ModalContextProvider>
-          <AuthProvider>
-            <SettingsProvider>
-              <ThemeConfig>
-                <ThemePrimaryColor>
-                  <RtlLayout>
-                    <NotistackProvider>
-                      <Settings />
-                      <Head>
-                        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-                      </Head>
-                      <TopProgressBar />
-                      <Component {...pageProps} />
-                    </NotistackProvider>
-                  </RtlLayout>
-                </ThemePrimaryColor>
-              </ThemeConfig>
-            </SettingsProvider>
-          </AuthProvider>
-        </ModalContextProvider>
-      </ApolloProvider>
+      <ReduxProvider store={store}>
+        <LocalizationProvider dateAdapter={AdapterDateFns}>
+          <ApolloProvider client={apolloClient}>
+            <ModalContextProvider>
+              <AuthProvider>
+                <SettingsProvider>
+                  <ThemeConfig>
+                    <ThemePrimaryColor>
+                      <RtlLayout>
+                        <NotistackProvider>
+                          <Settings />
+                          <Head>
+                            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+                          </Head>
+                          <TopProgressBar />
+                          <Component {...pageProps} />
+                        </NotistackProvider>
+                      </RtlLayout>
+                    </ThemePrimaryColor>
+                  </ThemeConfig>
+                </SettingsProvider>
+              </AuthProvider>
+            </ModalContextProvider>
+          </ApolloProvider>
+        </LocalizationProvider>
+      </ReduxProvider>
     </QueryClientProvider>
   );
 }

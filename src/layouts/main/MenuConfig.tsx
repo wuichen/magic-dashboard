@@ -10,19 +10,19 @@ import { PATH_AUTH, PATH_DOCS, PATH_PAGE, PATH_DASHBOARD } from '../../routes/pa
 
 const ICON_SIZE = {
   width: 22,
-  height: 22
+  height: 22,
 };
 
 const menuConfig = [
   {
     title: 'Home',
     icon: <Icon icon={homeFill} {...ICON_SIZE} />,
-    path: '/'
+    path: '/',
   },
   {
     title: 'Components',
     icon: <Icon icon={roundGrain} {...ICON_SIZE} />,
-    path: PATH_PAGE.components
+    path: PATH_PAGE.components,
   },
   {
     title: 'Pages',
@@ -38,36 +38,36 @@ const menuConfig = [
           { title: 'Pricing', path: PATH_PAGE.pricing },
           { title: 'Payment', path: PATH_PAGE.payment },
           { title: 'Maintenance', path: PATH_PAGE.maintenance },
-          { title: 'Coming Soon', path: PATH_PAGE.comingSoon }
-        ]
+          { title: 'Coming Soon', path: PATH_PAGE.comingSoon },
+        ],
       },
-      {
-        subheader: 'Authentication',
-        items: [
-          { title: 'Login', path: PATH_AUTH.loginUnprotected },
-          { title: 'Register', path: PATH_AUTH.registerUnprotected },
-          { title: 'Reset password', path: PATH_AUTH.resetPassword },
-          { title: 'Verify code', path: PATH_AUTH.verify }
-        ]
-      },
+      // {
+      //   subheader: 'Authentication',
+      //   items: [
+      //     { title: 'Login', path: PATH_AUTH.loginUnprotected },
+      //     { title: 'Register', path: PATH_AUTH.registerUnprotected },
+      //     { title: 'Reset password', path: PATH_AUTH.resetPassword },
+      //     { title: 'Verify code', path: PATH_AUTH.verify }
+      //   ]
+      // },
       {
         subheader: 'Error',
         items: [
           { title: 'Page 404', path: PATH_PAGE.page404 },
-          { title: 'Page 500', path: PATH_PAGE.page500 }
-        ]
+          { title: 'Page 500', path: PATH_PAGE.page500 },
+        ],
       },
       {
         subheader: 'Dashboard',
-        items: [{ title: 'Dashboard', path: PATH_DASHBOARD.root }]
-      }
-    ]
+        items: [{ title: 'Dashboard', path: PATH_DASHBOARD.root }],
+      },
+    ],
   },
   {
     title: 'Documentation',
     icon: <Icon icon={bookOpenFill} {...ICON_SIZE} />,
-    path: PATH_DOCS
-  }
+    path: PATH_DOCS,
+  },
 ];
 
 export default menuConfig;
