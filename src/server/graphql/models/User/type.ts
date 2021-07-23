@@ -7,9 +7,10 @@ export const User = objectType({
   },
   name: 'User',
   definition(t) {
-    t.int('id')
+    t.string('id')
     t.string('email')
     t.nullable.string('name')
+    t.nullable.json('doImage')
     t.nullable.string('password')
     t.field('createdAt', { type: 'DateTime' })
     t.field('updatedAt', { type: 'DateTime' })
@@ -39,6 +40,20 @@ export const User = objectType({
       },
       resolve(root: any) {
         return root.loginTokens
+      },
+    })
+    t.list.field('comments', {
+      type: 'Comment',
+      args: {
+        where: 'CommentWhereInput',
+        orderBy: 'CommentOrderByInput',
+        cursor: 'CommentWhereUniqueInput',
+        take: 'Int',
+        skip: 'Int',
+        distinct: 'CommentScalarFieldEnum',
+      },
+      resolve(root: any) {
+        return root.comments
       },
     })
   },

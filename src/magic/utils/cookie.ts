@@ -36,7 +36,7 @@ function generateCookie(name, value, extraOptions = {}) {
 
   const options = {
     maxAge: config.JWT_COOKIE_EXPIRES * 60 * 1000,
-    secure: __DEV__ ? false : true,
+    secure: process.env.NODE_ENV === 'development' ? false : true,
     httpOnly: true,
     path: '/',
     ...extraOptions,
@@ -46,7 +46,7 @@ function generateCookie(name, value, extraOptions = {}) {
   // then use it to specify the domain in cookie options
   // e.g. 'iamnoah.com' will match when used on req from 'magic.iamnoah.com'
   //      and allow the cookie to be shared on all iamnoah.com requests
-  if (!__DEV__ && config.ALLOWED_COOKIE_DOMAINS && extraOptions.domain) {
+  if (process.env.NODE_ENV !== 'development' && config.ALLOWED_COOKIE_DOMAINS && extraOptions.domain) {
     for (const allowedDomain of config.ALLOWED_COOKIE_DOMAINS) {
       if (!!~extraOptions.domain.indexOf(allowedDomain)) {
         options.domain = allowedDomain;

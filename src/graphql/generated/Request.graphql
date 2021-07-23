@@ -1,0 +1,72 @@
+fragment RequestFields on Request {
+  id
+  name
+  storyId
+  startDate
+  endDate
+}
+
+fragment Request on Request {
+  ...RequestFields
+  story {
+    ...StoryFields
+  }
+}
+
+query findUniqueRequest($where: RequestWhereUniqueInput!) {
+  findUniqueRequest(where: $where) {
+    ...Request
+  }
+}
+
+query findManyRequest(
+  $where: RequestWhereInput
+  $orderBy: [RequestOrderByInput!]
+  $cursor: RequestWhereUniqueInput
+  $skip: Int
+  $take: Int
+) {
+  findManyRequest(where: $where, orderBy: $orderBy, cursor: $cursor, skip: $skip, take: $take) {
+    ...Request
+  }
+}
+
+query findManyRequestCount(
+  $where: RequestWhereInput
+  $orderBy: [RequestOrderByInput!]
+  $cursor: RequestWhereUniqueInput
+  $skip: Int
+  $take: Int
+) {
+  findManyRequestCount(where: $where, orderBy: $orderBy, cursor: $cursor, skip: $skip, take: $take)
+}
+
+mutation createOneRequest($data: RequestCreateInput!) {
+  createOneRequest(data: $data) {
+    ...Request
+  }
+}
+
+mutation updateOneRequest($where: RequestWhereUniqueInput!, $data: RequestUpdateInput!) {
+  updateOneRequest(where: $where, data: $data) {
+    ...Request
+  }
+}
+
+mutation deleteOneRequest($where: RequestWhereUniqueInput!) {
+  deleteOneRequest(where: $where) {
+    ...Request
+  }
+}
+
+mutation deleteManyRequest($where: RequestWhereInput) {
+  deleteManyRequest(where: $where) {
+    count
+  }
+}
+
+mutation updateManyRequest($where: RequestWhereInput, $data: RequestUpdateManyMutationInput!) {
+  updateManyRequest(where: $where, data: $data) {
+    count
+  }
+}

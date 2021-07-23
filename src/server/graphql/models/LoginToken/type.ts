@@ -7,14 +7,14 @@ export const LoginToken = objectType({
   },
   name: 'LoginToken',
   definition(t) {
-    t.int('id')
+    t.string('id')
     t.field('user', {
       type: 'User',
       resolve(root: any) {
         return root.user
       },
     })
-    t.int('userId')
+    t.string('userId')
     t.boolean('approved')
     t.field('expires', { type: 'DateTime' })
     t.field('createdAt', { type: 'DateTime' })

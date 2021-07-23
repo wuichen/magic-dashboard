@@ -7,14 +7,14 @@ export const RefreshToken = objectType({
   },
   name: 'RefreshToken',
   definition(t) {
-    t.int('loginTokenId')
+    t.string('loginTokenId')
     t.field('user', {
       type: 'User',
       resolve(root: any) {
         return root.user
       },
     })
-    t.int('userId')
+    t.string('userId')
     t.field('createdAt', { type: 'DateTime' })
     t.field('expires', { type: 'DateTime' })
     t.string('value')

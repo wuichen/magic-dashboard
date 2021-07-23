@@ -1,0 +1,68 @@
+fragment ItemFields on Item {
+  id
+  name
+  description
+  doImage
+}
+
+fragment Item on Item {
+  ...ItemFields
+}
+
+query findUniqueItem($where: ItemWhereUniqueInput!) {
+  findUniqueItem(where: $where) {
+    ...Item
+  }
+}
+
+query findManyItem(
+  $where: ItemWhereInput
+  $orderBy: [ItemOrderByInput!]
+  $cursor: ItemWhereUniqueInput
+  $skip: Int
+  $take: Int
+) {
+  findManyItem(where: $where, orderBy: $orderBy, cursor: $cursor, skip: $skip, take: $take) {
+    ...Item
+  }
+}
+
+query findManyItemCount(
+  $where: ItemWhereInput
+  $orderBy: [ItemOrderByInput!]
+  $cursor: ItemWhereUniqueInput
+  $skip: Int
+  $take: Int
+) {
+  findManyItemCount(where: $where, orderBy: $orderBy, cursor: $cursor, skip: $skip, take: $take)
+}
+
+mutation createOneItem($data: ItemCreateInput!) {
+  createOneItem(data: $data) {
+    ...Item
+  }
+}
+
+mutation updateOneItem($where: ItemWhereUniqueInput!, $data: ItemUpdateInput!) {
+  updateOneItem(where: $where, data: $data) {
+    ...Item
+  }
+}
+
+mutation deleteOneItem($where: ItemWhereUniqueInput!) {
+  deleteOneItem(where: $where) {
+    ...Item
+  }
+}
+
+mutation deleteManyItem($where: ItemWhereInput) {
+  deleteManyItem(where: $where) {
+    count
+  }
+}
+
+mutation updateManyItem($where: ItemWhereInput, $data: ItemUpdateManyMutationInput!) {
+  updateManyItem(where: $where, data: $data) {
+    count
+  }
+}

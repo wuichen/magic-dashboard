@@ -2,43 +2,76 @@
 ### Do not make changes to this file directly
 
 
+type AggregateCollection {
+  _count: CollectionCountAggregateOutputType
+  _max: CollectionMaxAggregateOutputType
+  _min: CollectionMinAggregateOutputType
+  count: CollectionCountAggregateOutputType
+  max: CollectionMaxAggregateOutputType
+  min: CollectionMinAggregateOutputType
+}
+
+type AggregateComment {
+  _count: CommentCountAggregateOutputType
+  _max: CommentMaxAggregateOutputType
+  _min: CommentMinAggregateOutputType
+  count: CommentCountAggregateOutputType
+  max: CommentMaxAggregateOutputType
+  min: CommentMinAggregateOutputType
+}
+
+type AggregateItem {
+  _count: ItemCountAggregateOutputType
+  _max: ItemMaxAggregateOutputType
+  _min: ItemMinAggregateOutputType
+  count: ItemCountAggregateOutputType
+  max: ItemMaxAggregateOutputType
+  min: ItemMinAggregateOutputType
+}
+
 type AggregateLoginToken {
-  _avg: LoginTokenAvgAggregateOutputType
   _count: LoginTokenCountAggregateOutputType
   _max: LoginTokenMaxAggregateOutputType
   _min: LoginTokenMinAggregateOutputType
-  _sum: LoginTokenSumAggregateOutputType
-  avg: LoginTokenAvgAggregateOutputType
   count: LoginTokenCountAggregateOutputType
   max: LoginTokenMaxAggregateOutputType
   min: LoginTokenMinAggregateOutputType
-  sum: LoginTokenSumAggregateOutputType
 }
 
 type AggregateRefreshToken {
-  _avg: RefreshTokenAvgAggregateOutputType
   _count: RefreshTokenCountAggregateOutputType
   _max: RefreshTokenMaxAggregateOutputType
   _min: RefreshTokenMinAggregateOutputType
-  _sum: RefreshTokenSumAggregateOutputType
-  avg: RefreshTokenAvgAggregateOutputType
   count: RefreshTokenCountAggregateOutputType
   max: RefreshTokenMaxAggregateOutputType
   min: RefreshTokenMinAggregateOutputType
-  sum: RefreshTokenSumAggregateOutputType
+}
+
+type AggregateRequest {
+  _count: RequestCountAggregateOutputType
+  _max: RequestMaxAggregateOutputType
+  _min: RequestMinAggregateOutputType
+  count: RequestCountAggregateOutputType
+  max: RequestMaxAggregateOutputType
+  min: RequestMinAggregateOutputType
+}
+
+type AggregateStory {
+  _count: StoryCountAggregateOutputType
+  _max: StoryMaxAggregateOutputType
+  _min: StoryMinAggregateOutputType
+  count: StoryCountAggregateOutputType
+  max: StoryMaxAggregateOutputType
+  min: StoryMinAggregateOutputType
 }
 
 type AggregateUser {
-  _avg: UserAvgAggregateOutputType
   _count: UserCountAggregateOutputType
   _max: UserMaxAggregateOutputType
   _min: UserMinAggregateOutputType
-  _sum: UserSumAggregateOutputType
-  avg: UserAvgAggregateOutputType
   count: UserCountAggregateOutputType
   max: UserMaxAggregateOutputType
   min: UserMinAggregateOutputType
-  sum: UserSumAggregateOutputType
 }
 
 type BatchPayload {
@@ -68,6 +101,603 @@ input BoolWithAggregatesFilter {
   not: NestedBoolWithAggregatesFilter
 }
 
+type Collection {
+  description: String
+  doImage: Json
+  id: String!
+  name: String!
+  stories(cursor: StoryWhereUniqueInput, distinct: StoryScalarFieldEnum, orderBy: StoryOrderByInput, skip: Int, take: Int, where: StoryWhereInput): [Story!]!
+  storyOrder: [String!]!
+}
+
+type CollectionCountAggregateOutputType {
+  _all: Int!
+  description: Int!
+  doImage: Int!
+  id: Int!
+  name: Int!
+  storyOrder: Int!
+}
+
+input CollectionCreateInput {
+  description: String
+  doImage: Json
+  id: String
+  name: String!
+  stories: StoryCreateNestedManyWithoutCollectionInput
+  storyOrder: [String]
+}
+
+input CollectionCreateManyInput {
+  description: String
+  doImage: Json
+  id: String
+  name: String!
+  storyOrder: [String]
+}
+
+input CollectionCreateManystoryOrderInput {
+  set: String!
+}
+
+input CollectionCreateNestedOneWithoutStoriesInput {
+  connect: CollectionWhereUniqueInput
+  connectOrCreate: CollectionCreateOrConnectWithoutStoriesInput
+  create: CollectionUncheckedCreateWithoutStoriesInput
+}
+
+input CollectionCreateOrConnectWithoutStoriesInput {
+  create: CollectionUncheckedCreateWithoutStoriesInput!
+  where: CollectionWhereUniqueInput!
+}
+
+input CollectionCreateWithoutStoriesInput {
+  description: String
+  doImage: Json
+  id: String
+  name: String!
+  storyOrder: [String]
+}
+
+input CollectionCreatestoryOrderInput {
+  set: String!
+}
+
+type CollectionMaxAggregateOutputType {
+  description: String
+  id: String
+  name: String
+}
+
+type CollectionMinAggregateOutputType {
+  description: String
+  id: String
+  name: String
+}
+
+input CollectionOrderByInput {
+  description: SortOrder
+  doImage: SortOrder
+  id: SortOrder
+  name: SortOrder
+  storyOrder: SortOrder
+}
+
+input CollectionRelationFilter {
+  is: CollectionWhereInput
+  isNot: CollectionWhereInput
+}
+
+enum CollectionScalarFieldEnum {
+  description
+  doImage
+  id
+  name
+  storyOrder
+}
+
+input CollectionScalarWhereWithAggregatesInput {
+  AND: [CollectionScalarWhereWithAggregatesInput]
+  NOT: [CollectionScalarWhereWithAggregatesInput]
+  OR: [CollectionScalarWhereWithAggregatesInput]
+  description: StringNullableWithAggregatesFilter
+  doImage: JsonNullableWithAggregatesFilter
+  id: StringWithAggregatesFilter
+  name: StringWithAggregatesFilter
+  storyOrder: StringNullableListFilter
+}
+
+input CollectionUncheckedCreateInput {
+  description: String
+  doImage: Json
+  id: String
+  name: String!
+  stories: StoryUncheckedCreateNestedManyWithoutCollectionInput
+  storyOrder: [String]
+}
+
+input CollectionUncheckedCreateWithoutStoriesInput {
+  description: String
+  doImage: Json
+  id: String
+  name: String!
+  storyOrder: [String]
+}
+
+input CollectionUncheckedUpdateInput {
+  description: NullableStringFieldUpdateOperationsInput
+  doImage: Json
+  id: StringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  stories: StoryUncheckedUpdateManyWithoutCollectionInput
+  storyOrder: [String]
+}
+
+input CollectionUncheckedUpdateManyInput {
+  description: NullableStringFieldUpdateOperationsInput
+  doImage: Json
+  id: StringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  storyOrder: [String]
+}
+
+input CollectionUncheckedUpdateWithoutStoriesInput {
+  description: NullableStringFieldUpdateOperationsInput
+  doImage: Json
+  id: StringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  storyOrder: [String]
+}
+
+input CollectionUpdateInput {
+  description: NullableStringFieldUpdateOperationsInput
+  doImage: Json
+  id: StringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  stories: StoryUpdateManyWithoutCollectionInput
+  storyOrder: [String]
+}
+
+input CollectionUpdateManyMutationInput {
+  description: NullableStringFieldUpdateOperationsInput
+  doImage: Json
+  id: StringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  storyOrder: [String]
+}
+
+input CollectionUpdateOneRequiredWithoutStoriesInput {
+  connect: CollectionWhereUniqueInput
+  connectOrCreate: CollectionCreateOrConnectWithoutStoriesInput
+  create: CollectionUncheckedCreateWithoutStoriesInput
+  update: CollectionUncheckedUpdateWithoutStoriesInput
+  upsert: CollectionUpsertWithoutStoriesInput
+}
+
+input CollectionUpdateWithoutStoriesInput {
+  description: NullableStringFieldUpdateOperationsInput
+  doImage: Json
+  id: StringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  storyOrder: [String]
+}
+
+input CollectionUpdatestoryOrderInput {
+  push: [String]
+  set: [String]
+}
+
+input CollectionUpsertWithoutStoriesInput {
+  create: CollectionUncheckedCreateWithoutStoriesInput!
+  update: CollectionUncheckedUpdateWithoutStoriesInput!
+}
+
+input CollectionWhereInput {
+  AND: [CollectionWhereInput]
+  NOT: [CollectionWhereInput]
+  OR: [CollectionWhereInput]
+  description: StringNullableFilter
+  doImage: JsonNullableFilter
+  id: StringFilter
+  name: StringFilter
+  stories: StoryListRelationFilter
+  storyOrder: StringNullableListFilter
+}
+
+input CollectionWhereUniqueInput {
+  id: String
+}
+
+type Comment {
+  createdAt: DateTime
+  id: String!
+  message: String!
+  messageType: MessageType!
+  request: Request!
+  requestId: String!
+  user: User!
+  userId: String!
+}
+
+type CommentCountAggregateOutputType {
+  _all: Int!
+  createdAt: Int!
+  id: Int!
+  message: Int!
+  messageType: Int!
+  requestId: Int!
+  userId: Int!
+}
+
+input CommentCreateInput {
+  createdAt: DateTime
+  id: String
+  message: String!
+  messageType: MessageType!
+  request: RequestCreateNestedOneWithoutCommentsInput!
+  user: UserCreateNestedOneWithoutCommentsInput!
+}
+
+input CommentCreateManyInput {
+  createdAt: DateTime
+  id: String
+  message: String!
+  messageType: MessageType!
+  requestId: String!
+  userId: String!
+}
+
+input CommentCreateManyRequestInput {
+  createdAt: DateTime
+  id: String
+  message: String!
+  messageType: MessageType!
+  userId: String!
+}
+
+input CommentCreateManyRequestInputEnvelope {
+  data: CommentCreateManyRequestInput!
+  skipDuplicates: Boolean
+}
+
+input CommentCreateManyUserInput {
+  createdAt: DateTime
+  id: String
+  message: String!
+  messageType: MessageType!
+  requestId: String!
+}
+
+input CommentCreateManyUserInputEnvelope {
+  data: CommentCreateManyUserInput!
+  skipDuplicates: Boolean
+}
+
+input CommentCreateNestedManyWithoutRequestInput {
+  connect: [CommentWhereUniqueInput]
+  connectOrCreate: [CommentCreateOrConnectWithoutRequestInput]
+  create: [CommentCreateWithoutRequestInput]
+  createMany: CommentCreateManyRequestInputEnvelope
+}
+
+input CommentCreateNestedManyWithoutUserInput {
+  connect: [CommentWhereUniqueInput]
+  connectOrCreate: [CommentCreateOrConnectWithoutUserInput]
+  create: [CommentCreateWithoutUserInput]
+  createMany: CommentCreateManyUserInputEnvelope
+}
+
+input CommentCreateOrConnectWithoutRequestInput {
+  create: CommentUncheckedCreateWithoutRequestInput!
+  where: CommentWhereUniqueInput!
+}
+
+input CommentCreateOrConnectWithoutUserInput {
+  create: CommentUncheckedCreateWithoutUserInput!
+  where: CommentWhereUniqueInput!
+}
+
+input CommentCreateWithoutRequestInput {
+  createdAt: DateTime
+  id: String
+  message: String!
+  messageType: MessageType!
+  user: UserCreateNestedOneWithoutCommentsInput!
+}
+
+input CommentCreateWithoutUserInput {
+  createdAt: DateTime
+  id: String
+  message: String!
+  messageType: MessageType!
+  request: RequestCreateNestedOneWithoutCommentsInput!
+}
+
+input CommentListRelationFilter {
+  every: CommentWhereInput
+  none: CommentWhereInput
+  some: CommentWhereInput
+}
+
+type CommentMaxAggregateOutputType {
+  createdAt: DateTime
+  id: String
+  message: String
+  messageType: MessageType
+  requestId: String
+  userId: String
+}
+
+type CommentMinAggregateOutputType {
+  createdAt: DateTime
+  id: String
+  message: String
+  messageType: MessageType
+  requestId: String
+  userId: String
+}
+
+input CommentOrderByInput {
+  createdAt: SortOrder
+  id: SortOrder
+  message: SortOrder
+  messageType: SortOrder
+  requestId: SortOrder
+  userId: SortOrder
+}
+
+enum CommentScalarFieldEnum {
+  createdAt
+  id
+  message
+  messageType
+  requestId
+  userId
+}
+
+input CommentScalarWhereInput {
+  AND: [CommentScalarWhereInput]
+  NOT: [CommentScalarWhereInput]
+  OR: [CommentScalarWhereInput]
+  createdAt: DateTimeNullableFilter
+  id: StringFilter
+  message: StringFilter
+  messageType: EnumMessageTypeFilter
+  requestId: StringFilter
+  userId: StringFilter
+}
+
+input CommentScalarWhereWithAggregatesInput {
+  AND: [CommentScalarWhereWithAggregatesInput]
+  NOT: [CommentScalarWhereWithAggregatesInput]
+  OR: [CommentScalarWhereWithAggregatesInput]
+  createdAt: DateTimeNullableWithAggregatesFilter
+  id: StringWithAggregatesFilter
+  message: StringWithAggregatesFilter
+  messageType: EnumMessageTypeWithAggregatesFilter
+  requestId: StringWithAggregatesFilter
+  userId: StringWithAggregatesFilter
+}
+
+input CommentUncheckedCreateInput {
+  createdAt: DateTime
+  id: String
+  message: String!
+  messageType: MessageType!
+  requestId: String!
+  userId: String!
+}
+
+input CommentUncheckedCreateNestedManyWithoutRequestInput {
+  connect: [CommentWhereUniqueInput]
+  connectOrCreate: [CommentCreateOrConnectWithoutRequestInput]
+  create: [CommentCreateWithoutRequestInput]
+  createMany: CommentCreateManyRequestInputEnvelope
+}
+
+input CommentUncheckedCreateNestedManyWithoutUserInput {
+  connect: [CommentWhereUniqueInput]
+  connectOrCreate: [CommentCreateOrConnectWithoutUserInput]
+  create: [CommentCreateWithoutUserInput]
+  createMany: CommentCreateManyUserInputEnvelope
+}
+
+input CommentUncheckedCreateWithoutRequestInput {
+  createdAt: DateTime
+  id: String
+  message: String!
+  messageType: MessageType!
+  userId: String!
+}
+
+input CommentUncheckedCreateWithoutUserInput {
+  createdAt: DateTime
+  id: String
+  message: String!
+  messageType: MessageType!
+  requestId: String!
+}
+
+input CommentUncheckedUpdateInput {
+  createdAt: NullableDateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  message: StringFieldUpdateOperationsInput
+  messageType: EnumMessageTypeFieldUpdateOperationsInput
+  requestId: StringFieldUpdateOperationsInput
+  userId: StringFieldUpdateOperationsInput
+}
+
+input CommentUncheckedUpdateManyInput {
+  createdAt: NullableDateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  message: StringFieldUpdateOperationsInput
+  messageType: EnumMessageTypeFieldUpdateOperationsInput
+  requestId: StringFieldUpdateOperationsInput
+  userId: StringFieldUpdateOperationsInput
+}
+
+input CommentUncheckedUpdateManyWithoutCommentsInput {
+  createdAt: NullableDateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  message: StringFieldUpdateOperationsInput
+  messageType: EnumMessageTypeFieldUpdateOperationsInput
+  requestId: StringFieldUpdateOperationsInput
+}
+
+input CommentUncheckedUpdateManyWithoutRequestInput {
+  connect: [CommentWhereUniqueInput]
+  connectOrCreate: [CommentCreateOrConnectWithoutRequestInput]
+  create: [CommentCreateWithoutRequestInput]
+  createMany: CommentCreateManyRequestInputEnvelope
+  delete: [CommentWhereUniqueInput]
+  deleteMany: [CommentScalarWhereInput]
+  disconnect: [CommentWhereUniqueInput]
+  set: [CommentWhereUniqueInput]
+  update: [CommentUpdateWithWhereUniqueWithoutRequestInput]
+  updateMany: [CommentUpdateManyWithWhereWithoutRequestInput]
+  upsert: [CommentUpsertWithWhereUniqueWithoutRequestInput]
+}
+
+input CommentUncheckedUpdateManyWithoutUserInput {
+  connect: [CommentWhereUniqueInput]
+  connectOrCreate: [CommentCreateOrConnectWithoutUserInput]
+  create: [CommentCreateWithoutUserInput]
+  createMany: CommentCreateManyUserInputEnvelope
+  delete: [CommentWhereUniqueInput]
+  deleteMany: [CommentScalarWhereInput]
+  disconnect: [CommentWhereUniqueInput]
+  set: [CommentWhereUniqueInput]
+  update: [CommentUpdateWithWhereUniqueWithoutUserInput]
+  updateMany: [CommentUpdateManyWithWhereWithoutUserInput]
+  upsert: [CommentUpsertWithWhereUniqueWithoutUserInput]
+}
+
+input CommentUncheckedUpdateWithoutRequestInput {
+  createdAt: NullableDateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  message: StringFieldUpdateOperationsInput
+  messageType: EnumMessageTypeFieldUpdateOperationsInput
+  userId: StringFieldUpdateOperationsInput
+}
+
+input CommentUncheckedUpdateWithoutUserInput {
+  createdAt: NullableDateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  message: StringFieldUpdateOperationsInput
+  messageType: EnumMessageTypeFieldUpdateOperationsInput
+  requestId: StringFieldUpdateOperationsInput
+}
+
+input CommentUpdateInput {
+  createdAt: NullableDateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  message: StringFieldUpdateOperationsInput
+  messageType: EnumMessageTypeFieldUpdateOperationsInput
+  request: RequestUpdateOneRequiredWithoutCommentsInput
+  user: UserUpdateOneRequiredWithoutCommentsInput
+}
+
+input CommentUpdateManyMutationInput {
+  createdAt: NullableDateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  message: StringFieldUpdateOperationsInput
+  messageType: EnumMessageTypeFieldUpdateOperationsInput
+}
+
+input CommentUpdateManyWithWhereWithoutRequestInput {
+  data: CommentUncheckedUpdateManyWithoutCommentsInput!
+  where: CommentScalarWhereInput!
+}
+
+input CommentUpdateManyWithWhereWithoutUserInput {
+  data: CommentUncheckedUpdateManyWithoutCommentsInput!
+  where: CommentScalarWhereInput!
+}
+
+input CommentUpdateManyWithoutRequestInput {
+  connect: [CommentWhereUniqueInput]
+  connectOrCreate: [CommentCreateOrConnectWithoutRequestInput]
+  create: [CommentCreateWithoutRequestInput]
+  createMany: CommentCreateManyRequestInputEnvelope
+  delete: [CommentWhereUniqueInput]
+  deleteMany: [CommentScalarWhereInput]
+  disconnect: [CommentWhereUniqueInput]
+  set: [CommentWhereUniqueInput]
+  update: [CommentUpdateWithWhereUniqueWithoutRequestInput]
+  updateMany: [CommentUpdateManyWithWhereWithoutRequestInput]
+  upsert: [CommentUpsertWithWhereUniqueWithoutRequestInput]
+}
+
+input CommentUpdateManyWithoutUserInput {
+  connect: [CommentWhereUniqueInput]
+  connectOrCreate: [CommentCreateOrConnectWithoutUserInput]
+  create: [CommentCreateWithoutUserInput]
+  createMany: CommentCreateManyUserInputEnvelope
+  delete: [CommentWhereUniqueInput]
+  deleteMany: [CommentScalarWhereInput]
+  disconnect: [CommentWhereUniqueInput]
+  set: [CommentWhereUniqueInput]
+  update: [CommentUpdateWithWhereUniqueWithoutUserInput]
+  updateMany: [CommentUpdateManyWithWhereWithoutUserInput]
+  upsert: [CommentUpsertWithWhereUniqueWithoutUserInput]
+}
+
+input CommentUpdateWithWhereUniqueWithoutRequestInput {
+  data: CommentUncheckedUpdateWithoutRequestInput!
+  where: CommentWhereUniqueInput!
+}
+
+input CommentUpdateWithWhereUniqueWithoutUserInput {
+  data: CommentUncheckedUpdateWithoutUserInput!
+  where: CommentWhereUniqueInput!
+}
+
+input CommentUpdateWithoutRequestInput {
+  createdAt: NullableDateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  message: StringFieldUpdateOperationsInput
+  messageType: EnumMessageTypeFieldUpdateOperationsInput
+  user: UserUpdateOneRequiredWithoutCommentsInput
+}
+
+input CommentUpdateWithoutUserInput {
+  createdAt: NullableDateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  message: StringFieldUpdateOperationsInput
+  messageType: EnumMessageTypeFieldUpdateOperationsInput
+  request: RequestUpdateOneRequiredWithoutCommentsInput
+}
+
+input CommentUpsertWithWhereUniqueWithoutRequestInput {
+  create: CommentUncheckedCreateWithoutRequestInput!
+  update: CommentUncheckedUpdateWithoutRequestInput!
+  where: CommentWhereUniqueInput!
+}
+
+input CommentUpsertWithWhereUniqueWithoutUserInput {
+  create: CommentUncheckedCreateWithoutUserInput!
+  update: CommentUncheckedUpdateWithoutUserInput!
+  where: CommentWhereUniqueInput!
+}
+
+input CommentWhereInput {
+  AND: [CommentWhereInput]
+  NOT: [CommentWhereInput]
+  OR: [CommentWhereInput]
+  createdAt: DateTimeNullableFilter
+  id: StringFilter
+  message: StringFilter
+  messageType: EnumMessageTypeFilter
+  request: RequestWhereInput
+  requestId: StringFilter
+  user: UserWhereInput
+  userId: StringFilter
+}
+
+input CommentWhereUniqueInput {
+  id: String
+}
+
 """Date custom scalar type"""
 scalar DateTime
 
@@ -83,6 +713,34 @@ input DateTimeFilter {
   lt: DateTime
   lte: DateTime
   not: NestedDateTimeFilter
+  notIn: [DateTime]
+}
+
+input DateTimeNullableFilter {
+  equals: DateTime
+  gt: DateTime
+  gte: DateTime
+  in: [DateTime]
+  lt: DateTime
+  lte: DateTime
+  not: NestedDateTimeNullableFilter
+  notIn: [DateTime]
+}
+
+input DateTimeNullableWithAggregatesFilter {
+  _count: NestedIntNullableFilter
+  _max: NestedDateTimeNullableFilter
+  _min: NestedDateTimeNullableFilter
+  count: NestedIntNullableFilter
+  equals: DateTime
+  gt: DateTime
+  gte: DateTime
+  in: [DateTime]
+  lt: DateTime
+  lte: DateTime
+  max: NestedDateTimeNullableFilter
+  min: NestedDateTimeNullableFilter
+  not: NestedDateTimeNullableWithAggregatesFilter
   notIn: [DateTime]
 }
 
@@ -106,51 +764,265 @@ input DateTimeWithAggregatesFilter {
 """Decimal custom scalar type"""
 scalar Decimal
 
-input IntFieldUpdateOperationsInput {
-  decrement: Int
-  divide: Int
-  increment: Int
-  multiply: Int
-  set: Int
+input EnumMessageTypeFieldUpdateOperationsInput {
+  set: MessageType
 }
 
-input IntFilter {
-  equals: Int
-  gt: Int
-  gte: Int
-  in: [Int]
-  lt: Int
-  lte: Int
-  not: NestedIntFilter
-  notIn: [Int]
+input EnumMessageTypeFilter {
+  equals: MessageType
+  in: [MessageType]
+  not: NestedEnumMessageTypeFilter
+  notIn: [MessageType]
 }
 
-input IntWithAggregatesFilter {
-  _avg: NestedFloatFilter
+input EnumMessageTypeWithAggregatesFilter {
   _count: NestedIntFilter
-  _max: NestedIntFilter
-  _min: NestedIntFilter
-  _sum: NestedIntFilter
-  avg: NestedFloatFilter
+  _max: NestedEnumMessageTypeFilter
+  _min: NestedEnumMessageTypeFilter
   count: NestedIntFilter
-  equals: Int
-  gt: Int
-  gte: Int
-  in: [Int]
-  lt: Int
-  lte: Int
-  max: NestedIntFilter
-  min: NestedIntFilter
-  not: NestedIntWithAggregatesFilter
-  notIn: [Int]
-  sum: NestedIntFilter
+  equals: MessageType
+  in: [MessageType]
+  max: NestedEnumMessageTypeFilter
+  min: NestedEnumMessageTypeFilter
+  not: NestedEnumMessageTypeWithAggregatesFilter
+  notIn: [MessageType]
 }
+
+type Item {
+  description: String
+  doImage: Json
+  id: String!
+  name: String!
+  stories(cursor: StoryWhereUniqueInput, distinct: StoryScalarFieldEnum, orderBy: StoryOrderByInput, skip: Int, take: Int, where: StoryWhereInput): [Story!]!
+}
+
+type ItemCountAggregateOutputType {
+  _all: Int!
+  description: Int!
+  doImage: Int!
+  id: Int!
+  name: Int!
+}
+
+input ItemCreateInput {
+  description: String
+  doImage: Json
+  id: String
+  name: String!
+  stories: StoryCreateNestedManyWithoutItemsInput
+}
+
+input ItemCreateManyInput {
+  description: String
+  doImage: Json
+  id: String
+  name: String!
+}
+
+input ItemCreateNestedManyWithoutStoriesInput {
+  connect: [ItemWhereUniqueInput]
+  connectOrCreate: [ItemCreateOrConnectWithoutStoriesInput]
+  create: [ItemCreateWithoutStoriesInput]
+}
+
+input ItemCreateOrConnectWithoutStoriesInput {
+  create: ItemUncheckedCreateWithoutStoriesInput!
+  where: ItemWhereUniqueInput!
+}
+
+input ItemCreateWithoutStoriesInput {
+  description: String
+  doImage: Json
+  id: String
+  name: String!
+}
+
+input ItemListRelationFilter {
+  every: ItemWhereInput
+  none: ItemWhereInput
+  some: ItemWhereInput
+}
+
+type ItemMaxAggregateOutputType {
+  description: String
+  id: String
+  name: String
+}
+
+type ItemMinAggregateOutputType {
+  description: String
+  id: String
+  name: String
+}
+
+input ItemOrderByInput {
+  description: SortOrder
+  doImage: SortOrder
+  id: SortOrder
+  name: SortOrder
+}
+
+enum ItemScalarFieldEnum {
+  description
+  doImage
+  id
+  name
+}
+
+input ItemScalarWhereInput {
+  AND: [ItemScalarWhereInput]
+  NOT: [ItemScalarWhereInput]
+  OR: [ItemScalarWhereInput]
+  description: StringNullableFilter
+  doImage: JsonNullableFilter
+  id: StringFilter
+  name: StringFilter
+}
+
+input ItemScalarWhereWithAggregatesInput {
+  AND: [ItemScalarWhereWithAggregatesInput]
+  NOT: [ItemScalarWhereWithAggregatesInput]
+  OR: [ItemScalarWhereWithAggregatesInput]
+  description: StringNullableWithAggregatesFilter
+  doImage: JsonNullableWithAggregatesFilter
+  id: StringWithAggregatesFilter
+  name: StringWithAggregatesFilter
+}
+
+input ItemUncheckedCreateInput {
+  description: String
+  doImage: Json
+  id: String
+  name: String!
+}
+
+input ItemUncheckedCreateWithoutStoriesInput {
+  description: String
+  doImage: Json
+  id: String
+  name: String!
+}
+
+input ItemUncheckedUpdateInput {
+  description: NullableStringFieldUpdateOperationsInput
+  doImage: Json
+  id: StringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+}
+
+input ItemUncheckedUpdateManyInput {
+  description: NullableStringFieldUpdateOperationsInput
+  doImage: Json
+  id: StringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+}
+
+input ItemUncheckedUpdateManyWithoutItemsInput {
+  description: NullableStringFieldUpdateOperationsInput
+  doImage: Json
+  id: StringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+}
+
+input ItemUncheckedUpdateWithoutStoriesInput {
+  description: NullableStringFieldUpdateOperationsInput
+  doImage: Json
+  id: StringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+}
+
+input ItemUpdateInput {
+  description: NullableStringFieldUpdateOperationsInput
+  doImage: Json
+  id: StringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  stories: StoryUpdateManyWithoutItemsInput
+}
+
+input ItemUpdateManyMutationInput {
+  description: NullableStringFieldUpdateOperationsInput
+  doImage: Json
+  id: StringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+}
+
+input ItemUpdateManyWithWhereWithoutStoriesInput {
+  data: ItemUncheckedUpdateManyWithoutItemsInput!
+  where: ItemScalarWhereInput!
+}
+
+input ItemUpdateManyWithoutStoriesInput {
+  connect: [ItemWhereUniqueInput]
+  connectOrCreate: [ItemCreateOrConnectWithoutStoriesInput]
+  create: [ItemCreateWithoutStoriesInput]
+  delete: [ItemWhereUniqueInput]
+  deleteMany: [ItemScalarWhereInput]
+  disconnect: [ItemWhereUniqueInput]
+  set: [ItemWhereUniqueInput]
+  update: [ItemUpdateWithWhereUniqueWithoutStoriesInput]
+  updateMany: [ItemUpdateManyWithWhereWithoutStoriesInput]
+  upsert: [ItemUpsertWithWhereUniqueWithoutStoriesInput]
+}
+
+input ItemUpdateWithWhereUniqueWithoutStoriesInput {
+  data: ItemUncheckedUpdateWithoutStoriesInput!
+  where: ItemWhereUniqueInput!
+}
+
+input ItemUpdateWithoutStoriesInput {
+  description: NullableStringFieldUpdateOperationsInput
+  doImage: Json
+  id: StringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+}
+
+input ItemUpsertWithWhereUniqueWithoutStoriesInput {
+  create: ItemUncheckedCreateWithoutStoriesInput!
+  update: ItemUncheckedUpdateWithoutStoriesInput!
+  where: ItemWhereUniqueInput!
+}
+
+input ItemWhereInput {
+  AND: [ItemWhereInput]
+  NOT: [ItemWhereInput]
+  OR: [ItemWhereInput]
+  description: StringNullableFilter
+  doImage: JsonNullableFilter
+  id: StringFilter
+  name: StringFilter
+  stories: StoryListRelationFilter
+}
+
+input ItemWhereUniqueInput {
+  id: String
+}
+
+"""
+The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
+"""
+scalar JSON @specifiedBy(url: "http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf")
 
 """Json custom scalar type"""
 scalar Json
 
 input JsonFilter {
   equals: Json
+  not: Json
+}
+
+input JsonNullableFilter {
+  equals: Json
+  not: Json
+}
+
+input JsonNullableWithAggregatesFilter {
+  _count: NestedIntNullableFilter
+  _max: NestedJsonNullableFilter
+  _min: NestedJsonNullableFilter
+  count: NestedIntNullableFilter
+  equals: Json
+  max: NestedJsonNullableFilter
+  min: NestedJsonNullableFilter
   not: Json
 }
 
@@ -172,18 +1044,13 @@ type LoginToken {
   email: String!
   expires: DateTime!
   geo: Json!
-  id: Int!
+  id: String!
   ip: String!
   secret: String!
   user: User!
   userAgent: String!
   userAgentRaw: String!
-  userId: Int!
-}
-
-type LoginTokenAvgAggregateOutputType {
-  id: Float
-  userId: Float
+  userId: String!
 }
 
 type LoginTokenCountAggregateOutputType {
@@ -209,6 +1076,7 @@ input LoginTokenCreateInput {
   email: String!
   expires: DateTime!
   geo: Json!
+  id: String
   ip: String!
   secret: String!
   user: UserCreateNestedOneWithoutLoginTokensInput!
@@ -223,12 +1091,12 @@ input LoginTokenCreateManyInput {
   email: String!
   expires: DateTime!
   geo: Json!
-  id: Int
+  id: String
   ip: String!
   secret: String!
   userAgent: String!
   userAgentRaw: String!
-  userId: Int!
+  userId: String!
 }
 
 input LoginTokenCreateManyUserInput {
@@ -238,7 +1106,7 @@ input LoginTokenCreateManyUserInput {
   email: String!
   expires: DateTime!
   geo: Json!
-  id: Int
+  id: String
   ip: String!
   secret: String!
   userAgent: String!
@@ -269,6 +1137,7 @@ input LoginTokenCreateWithoutUserInput {
   email: String!
   expires: DateTime!
   geo: Json!
+  id: String
   ip: String!
   secret: String!
   userAgent: String!
@@ -287,12 +1156,12 @@ type LoginTokenMaxAggregateOutputType {
   domain: String
   email: String
   expires: DateTime
-  id: Int
+  id: String
   ip: String
   secret: String
   userAgent: String
   userAgentRaw: String
-  userId: Int
+  userId: String
 }
 
 type LoginTokenMinAggregateOutputType {
@@ -301,12 +1170,12 @@ type LoginTokenMinAggregateOutputType {
   domain: String
   email: String
   expires: DateTime
-  id: Int
+  id: String
   ip: String
   secret: String
   userAgent: String
   userAgentRaw: String
-  userId: Int
+  userId: String
 }
 
 input LoginTokenOrderByInput {
@@ -349,12 +1218,12 @@ input LoginTokenScalarWhereInput {
   email: StringFilter
   expires: DateTimeFilter
   geo: JsonFilter
-  id: IntFilter
+  id: StringFilter
   ip: StringFilter
   secret: StringFilter
   userAgent: StringFilter
   userAgentRaw: StringFilter
-  userId: IntFilter
+  userId: StringFilter
 }
 
 input LoginTokenScalarWhereWithAggregatesInput {
@@ -367,17 +1236,12 @@ input LoginTokenScalarWhereWithAggregatesInput {
   email: StringWithAggregatesFilter
   expires: DateTimeWithAggregatesFilter
   geo: JsonWithAggregatesFilter
-  id: IntWithAggregatesFilter
+  id: StringWithAggregatesFilter
   ip: StringWithAggregatesFilter
   secret: StringWithAggregatesFilter
   userAgent: StringWithAggregatesFilter
   userAgentRaw: StringWithAggregatesFilter
-  userId: IntWithAggregatesFilter
-}
-
-type LoginTokenSumAggregateOutputType {
-  id: Int
-  userId: Int
+  userId: StringWithAggregatesFilter
 }
 
 input LoginTokenUncheckedCreateInput {
@@ -387,12 +1251,12 @@ input LoginTokenUncheckedCreateInput {
   email: String!
   expires: DateTime!
   geo: Json!
-  id: Int
+  id: String
   ip: String!
   secret: String!
   userAgent: String!
   userAgentRaw: String!
-  userId: Int!
+  userId: String!
 }
 
 input LoginTokenUncheckedCreateNestedManyWithoutUserInput {
@@ -409,7 +1273,7 @@ input LoginTokenUncheckedCreateWithoutUserInput {
   email: String!
   expires: DateTime!
   geo: Json!
-  id: Int
+  id: String
   ip: String!
   secret: String!
   userAgent: String!
@@ -423,12 +1287,12 @@ input LoginTokenUncheckedUpdateInput {
   email: StringFieldUpdateOperationsInput
   expires: DateTimeFieldUpdateOperationsInput
   geo: Json
-  id: IntFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
   ip: StringFieldUpdateOperationsInput
   secret: StringFieldUpdateOperationsInput
   userAgent: StringFieldUpdateOperationsInput
   userAgentRaw: StringFieldUpdateOperationsInput
-  userId: IntFieldUpdateOperationsInput
+  userId: StringFieldUpdateOperationsInput
 }
 
 input LoginTokenUncheckedUpdateManyInput {
@@ -438,12 +1302,12 @@ input LoginTokenUncheckedUpdateManyInput {
   email: StringFieldUpdateOperationsInput
   expires: DateTimeFieldUpdateOperationsInput
   geo: Json
-  id: IntFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
   ip: StringFieldUpdateOperationsInput
   secret: StringFieldUpdateOperationsInput
   userAgent: StringFieldUpdateOperationsInput
   userAgentRaw: StringFieldUpdateOperationsInput
-  userId: IntFieldUpdateOperationsInput
+  userId: StringFieldUpdateOperationsInput
 }
 
 input LoginTokenUncheckedUpdateManyWithoutLoginTokensInput {
@@ -453,7 +1317,7 @@ input LoginTokenUncheckedUpdateManyWithoutLoginTokensInput {
   email: StringFieldUpdateOperationsInput
   expires: DateTimeFieldUpdateOperationsInput
   geo: Json
-  id: IntFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
   ip: StringFieldUpdateOperationsInput
   secret: StringFieldUpdateOperationsInput
   userAgent: StringFieldUpdateOperationsInput
@@ -481,7 +1345,7 @@ input LoginTokenUncheckedUpdateWithoutUserInput {
   email: StringFieldUpdateOperationsInput
   expires: DateTimeFieldUpdateOperationsInput
   geo: Json
-  id: IntFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
   ip: StringFieldUpdateOperationsInput
   secret: StringFieldUpdateOperationsInput
   userAgent: StringFieldUpdateOperationsInput
@@ -495,6 +1359,7 @@ input LoginTokenUpdateInput {
   email: StringFieldUpdateOperationsInput
   expires: DateTimeFieldUpdateOperationsInput
   geo: Json
+  id: StringFieldUpdateOperationsInput
   ip: StringFieldUpdateOperationsInput
   secret: StringFieldUpdateOperationsInput
   user: UserUpdateOneRequiredWithoutLoginTokensInput
@@ -509,6 +1374,7 @@ input LoginTokenUpdateManyMutationInput {
   email: StringFieldUpdateOperationsInput
   expires: DateTimeFieldUpdateOperationsInput
   geo: Json
+  id: StringFieldUpdateOperationsInput
   ip: StringFieldUpdateOperationsInput
   secret: StringFieldUpdateOperationsInput
   userAgent: StringFieldUpdateOperationsInput
@@ -546,6 +1412,7 @@ input LoginTokenUpdateWithoutUserInput {
   email: StringFieldUpdateOperationsInput
   expires: DateTimeFieldUpdateOperationsInput
   geo: Json
+  id: StringFieldUpdateOperationsInput
   ip: StringFieldUpdateOperationsInput
   secret: StringFieldUpdateOperationsInput
   userAgent: StringFieldUpdateOperationsInput
@@ -568,41 +1435,78 @@ input LoginTokenWhereInput {
   email: StringFilter
   expires: DateTimeFilter
   geo: JsonFilter
-  id: IntFilter
+  id: StringFilter
   ip: StringFilter
   secret: StringFilter
   user: UserWhereInput
   userAgent: StringFilter
   userAgentRaw: StringFilter
-  userId: IntFilter
+  userId: StringFilter
 }
 
 input LoginTokenWhereUniqueInput {
-  id: Int
+  id: String
+}
+
+enum MessageType {
+  image
+  text
 }
 
 type Mutation {
+  createOneCollection(data: CollectionCreateInput!): Collection!
+  createOneComment(data: CommentCreateInput!): Comment!
+  createOneItem(data: ItemCreateInput!): Item!
   createOneLoginToken(data: LoginTokenCreateInput!): LoginToken!
   createOneRefreshToken(data: RefreshTokenCreateInput!): RefreshToken!
+  createOneRequest(data: RequestCreateInput!): Request!
+  createOneStory(data: StoryCreateInput!): Story!
   createOneUser(data: UserCreateInput!): User!
+  deleteManyCollection(where: CollectionWhereInput): BatchPayload!
+  deleteManyComment(where: CommentWhereInput): BatchPayload!
+  deleteManyItem(where: ItemWhereInput): BatchPayload!
   deleteManyLoginToken(where: LoginTokenWhereInput): BatchPayload!
   deleteManyRefreshToken(where: RefreshTokenWhereInput): BatchPayload!
+  deleteManyRequest(where: RequestWhereInput): BatchPayload!
+  deleteManyStory(where: StoryWhereInput): BatchPayload!
   deleteManyUser(where: UserWhereInput): BatchPayload!
+  deleteOneCollection(where: CollectionWhereUniqueInput!): Collection
+  deleteOneComment(where: CommentWhereUniqueInput!): Comment
+  deleteOneItem(where: ItemWhereUniqueInput!): Item
   deleteOneLoginToken(where: LoginTokenWhereUniqueInput!): LoginToken
   deleteOneRefreshToken(where: RefreshTokenWhereUniqueInput!): RefreshToken
+  deleteOneRequest(where: RequestWhereUniqueInput!): Request
+  deleteOneStory(where: StoryWhereUniqueInput!): Story
   deleteOneUser(where: UserWhereUniqueInput!): User
+  enterAdmin(admin: String!, id: Int!): JSON
   login(email: String!, password: String!): User
   logout: Boolean
+  logoutAdmin: JSON
   signup(email: String!, name: String, password: String!): User
+  updateManyCollection(data: CollectionUpdateManyMutationInput!, where: CollectionWhereInput): BatchPayload!
+  updateManyComment(data: CommentUpdateManyMutationInput!, where: CommentWhereInput): BatchPayload!
+  updateManyItem(data: ItemUpdateManyMutationInput!, where: ItemWhereInput): BatchPayload!
   updateManyLoginToken(data: LoginTokenUpdateManyMutationInput!, where: LoginTokenWhereInput): BatchPayload!
   updateManyRefreshToken(data: RefreshTokenUpdateManyMutationInput!, where: RefreshTokenWhereInput): BatchPayload!
+  updateManyRequest(data: RequestUpdateManyMutationInput!, where: RequestWhereInput): BatchPayload!
+  updateManyStory(data: StoryUpdateManyMutationInput!, where: StoryWhereInput): BatchPayload!
   updateManyUser(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
+  updateOneCollection(data: CollectionUpdateInput!, where: CollectionWhereUniqueInput!): Collection!
+  updateOneComment(data: CommentUpdateInput!, where: CommentWhereUniqueInput!): Comment!
+  updateOneItem(data: ItemUpdateInput!, where: ItemWhereUniqueInput!): Item!
   updateOneLoginToken(data: LoginTokenUpdateInput!, where: LoginTokenWhereUniqueInput!): LoginToken!
   updateOneRefreshToken(data: RefreshTokenUpdateInput!, where: RefreshTokenWhereUniqueInput!): RefreshToken!
+  updateOneRequest(data: RequestUpdateInput!, where: RequestWhereUniqueInput!): Request!
+  updateOneStory(data: StoryUpdateInput!, where: StoryWhereUniqueInput!): Story!
   updateOneUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User!
   updatePassword(currentPassword: String!, password: String!): Boolean
+  upsertOneCollection(create: CollectionCreateInput!, update: CollectionUpdateInput!, where: CollectionWhereUniqueInput!): Collection!
+  upsertOneComment(create: CommentCreateInput!, update: CommentUpdateInput!, where: CommentWhereUniqueInput!): Comment!
+  upsertOneItem(create: ItemCreateInput!, update: ItemUpdateInput!, where: ItemWhereUniqueInput!): Item!
   upsertOneLoginToken(create: LoginTokenCreateInput!, update: LoginTokenUpdateInput!, where: LoginTokenWhereUniqueInput!): LoginToken!
   upsertOneRefreshToken(create: RefreshTokenCreateInput!, update: RefreshTokenUpdateInput!, where: RefreshTokenWhereUniqueInput!): RefreshToken!
+  upsertOneRequest(create: RequestCreateInput!, update: RequestUpdateInput!, where: RequestWhereUniqueInput!): Request!
+  upsertOneStory(create: StoryCreateInput!, update: StoryUpdateInput!, where: StoryWhereUniqueInput!): Story!
   upsertOneUser(create: UserCreateInput!, update: UserUpdateInput!, where: UserWhereUniqueInput!): User!
 }
 
@@ -633,6 +1537,34 @@ input NestedDateTimeFilter {
   notIn: [DateTime]
 }
 
+input NestedDateTimeNullableFilter {
+  equals: DateTime
+  gt: DateTime
+  gte: DateTime
+  in: [DateTime]
+  lt: DateTime
+  lte: DateTime
+  not: NestedDateTimeNullableFilter
+  notIn: [DateTime]
+}
+
+input NestedDateTimeNullableWithAggregatesFilter {
+  _count: NestedIntNullableFilter
+  _max: NestedDateTimeNullableFilter
+  _min: NestedDateTimeNullableFilter
+  count: NestedIntNullableFilter
+  equals: DateTime
+  gt: DateTime
+  gte: DateTime
+  in: [DateTime]
+  lt: DateTime
+  lte: DateTime
+  max: NestedDateTimeNullableFilter
+  min: NestedDateTimeNullableFilter
+  not: NestedDateTimeNullableWithAggregatesFilter
+  notIn: [DateTime]
+}
+
 input NestedDateTimeWithAggregatesFilter {
   _count: NestedIntFilter
   _max: NestedDateTimeFilter
@@ -650,15 +1582,24 @@ input NestedDateTimeWithAggregatesFilter {
   notIn: [DateTime]
 }
 
-input NestedFloatFilter {
-  equals: Float
-  gt: Float
-  gte: Float
-  in: [Float]
-  lt: Float
-  lte: Float
-  not: NestedFloatFilter
-  notIn: [Float]
+input NestedEnumMessageTypeFilter {
+  equals: MessageType
+  in: [MessageType]
+  not: NestedEnumMessageTypeFilter
+  notIn: [MessageType]
+}
+
+input NestedEnumMessageTypeWithAggregatesFilter {
+  _count: NestedIntFilter
+  _max: NestedEnumMessageTypeFilter
+  _min: NestedEnumMessageTypeFilter
+  count: NestedIntFilter
+  equals: MessageType
+  in: [MessageType]
+  max: NestedEnumMessageTypeFilter
+  min: NestedEnumMessageTypeFilter
+  not: NestedEnumMessageTypeWithAggregatesFilter
+  notIn: [MessageType]
 }
 
 input NestedIntFilter {
@@ -683,28 +1624,12 @@ input NestedIntNullableFilter {
   notIn: [Int]
 }
 
-input NestedIntWithAggregatesFilter {
-  _avg: NestedFloatFilter
-  _count: NestedIntFilter
-  _max: NestedIntFilter
-  _min: NestedIntFilter
-  _sum: NestedIntFilter
-  avg: NestedFloatFilter
-  count: NestedIntFilter
-  equals: Int
-  gt: Int
-  gte: Int
-  in: [Int]
-  lt: Int
-  lte: Int
-  max: NestedIntFilter
-  min: NestedIntFilter
-  not: NestedIntWithAggregatesFilter
-  notIn: [Int]
-  sum: NestedIntFilter
+input NestedJsonFilter {
+  equals: Json
+  not: Json
 }
 
-input NestedJsonFilter {
+input NestedJsonNullableFilter {
   equals: Json
   not: Json
 }
@@ -777,27 +1702,58 @@ input NestedStringWithAggregatesFilter {
   startsWith: String
 }
 
+input NullableDateTimeFieldUpdateOperationsInput {
+  set: DateTime
+}
+
 input NullableStringFieldUpdateOperationsInput {
   set: String
 }
 
 type Query {
+  aggregateCollection(cursor: CollectionWhereUniqueInput, distinct: CollectionScalarFieldEnum, orderBy: [CollectionOrderByInput], skip: Int, take: Int, where: CollectionWhereInput): AggregateCollection
+  aggregateComment(cursor: CommentWhereUniqueInput, distinct: CommentScalarFieldEnum, orderBy: [CommentOrderByInput], skip: Int, take: Int, where: CommentWhereInput): AggregateComment
+  aggregateItem(cursor: ItemWhereUniqueInput, distinct: ItemScalarFieldEnum, orderBy: [ItemOrderByInput], skip: Int, take: Int, where: ItemWhereInput): AggregateItem
   aggregateLoginToken(cursor: LoginTokenWhereUniqueInput, distinct: LoginTokenScalarFieldEnum, orderBy: [LoginTokenOrderByInput], skip: Int, take: Int, where: LoginTokenWhereInput): AggregateLoginToken
   aggregateRefreshToken(cursor: RefreshTokenWhereUniqueInput, distinct: RefreshTokenScalarFieldEnum, orderBy: [RefreshTokenOrderByInput], skip: Int, take: Int, where: RefreshTokenWhereInput): AggregateRefreshToken
+  aggregateRequest(cursor: RequestWhereUniqueInput, distinct: RequestScalarFieldEnum, orderBy: [RequestOrderByInput], skip: Int, take: Int, where: RequestWhereInput): AggregateRequest
+  aggregateStory(cursor: StoryWhereUniqueInput, distinct: StoryScalarFieldEnum, orderBy: [StoryOrderByInput], skip: Int, take: Int, where: StoryWhereInput): AggregateStory
   aggregateUser(cursor: UserWhereUniqueInput, distinct: UserScalarFieldEnum, orderBy: [UserOrderByInput], skip: Int, take: Int, where: UserWhereInput): AggregateUser
+  findFirstCollection(cursor: CollectionWhereUniqueInput, distinct: CollectionScalarFieldEnum, orderBy: [CollectionOrderByInput], skip: Int, take: Int, where: CollectionWhereInput): Collection
+  findFirstComment(cursor: CommentWhereUniqueInput, distinct: CommentScalarFieldEnum, orderBy: [CommentOrderByInput], skip: Int, take: Int, where: CommentWhereInput): Comment
+  findFirstItem(cursor: ItemWhereUniqueInput, distinct: ItemScalarFieldEnum, orderBy: [ItemOrderByInput], skip: Int, take: Int, where: ItemWhereInput): Item
   findFirstLoginToken(cursor: LoginTokenWhereUniqueInput, distinct: LoginTokenScalarFieldEnum, orderBy: [LoginTokenOrderByInput], skip: Int, take: Int, where: LoginTokenWhereInput): LoginToken
   findFirstRefreshToken(cursor: RefreshTokenWhereUniqueInput, distinct: RefreshTokenScalarFieldEnum, orderBy: [RefreshTokenOrderByInput], skip: Int, take: Int, where: RefreshTokenWhereInput): RefreshToken
+  findFirstRequest(cursor: RequestWhereUniqueInput, distinct: RequestScalarFieldEnum, orderBy: [RequestOrderByInput], skip: Int, take: Int, where: RequestWhereInput): Request
+  findFirstStory(cursor: StoryWhereUniqueInput, distinct: StoryScalarFieldEnum, orderBy: [StoryOrderByInput], skip: Int, take: Int, where: StoryWhereInput): Story
   findFirstUser(cursor: UserWhereUniqueInput, distinct: UserScalarFieldEnum, orderBy: [UserOrderByInput], skip: Int, take: Int, where: UserWhereInput): User
+  findManyCollection(cursor: CollectionWhereUniqueInput, distinct: CollectionScalarFieldEnum, orderBy: [CollectionOrderByInput], skip: Int, take: Int, where: CollectionWhereInput): [Collection!]!
+  findManyCollectionCount(cursor: CollectionWhereUniqueInput, distinct: CollectionScalarFieldEnum, orderBy: [CollectionOrderByInput], skip: Int, take: Int, where: CollectionWhereInput): Int!
+  findManyComment(cursor: CommentWhereUniqueInput, distinct: CommentScalarFieldEnum, orderBy: [CommentOrderByInput], skip: Int, take: Int, where: CommentWhereInput): [Comment!]!
+  findManyCommentCount(cursor: CommentWhereUniqueInput, distinct: CommentScalarFieldEnum, orderBy: [CommentOrderByInput], skip: Int, take: Int, where: CommentWhereInput): Int!
+  findManyItem(cursor: ItemWhereUniqueInput, distinct: ItemScalarFieldEnum, orderBy: [ItemOrderByInput], skip: Int, take: Int, where: ItemWhereInput): [Item!]!
+  findManyItemCount(cursor: ItemWhereUniqueInput, distinct: ItemScalarFieldEnum, orderBy: [ItemOrderByInput], skip: Int, take: Int, where: ItemWhereInput): Int!
   findManyLoginToken(cursor: LoginTokenWhereUniqueInput, distinct: LoginTokenScalarFieldEnum, orderBy: [LoginTokenOrderByInput], skip: Int, take: Int, where: LoginTokenWhereInput): [LoginToken!]!
   findManyLoginTokenCount(cursor: LoginTokenWhereUniqueInput, distinct: LoginTokenScalarFieldEnum, orderBy: [LoginTokenOrderByInput], skip: Int, take: Int, where: LoginTokenWhereInput): Int!
   findManyRefreshToken(cursor: RefreshTokenWhereUniqueInput, distinct: RefreshTokenScalarFieldEnum, orderBy: [RefreshTokenOrderByInput], skip: Int, take: Int, where: RefreshTokenWhereInput): [RefreshToken!]!
   findManyRefreshTokenCount(cursor: RefreshTokenWhereUniqueInput, distinct: RefreshTokenScalarFieldEnum, orderBy: [RefreshTokenOrderByInput], skip: Int, take: Int, where: RefreshTokenWhereInput): Int!
+  findManyRequest(cursor: RequestWhereUniqueInput, distinct: RequestScalarFieldEnum, orderBy: [RequestOrderByInput], skip: Int, take: Int, where: RequestWhereInput): [Request!]!
+  findManyRequestCount(cursor: RequestWhereUniqueInput, distinct: RequestScalarFieldEnum, orderBy: [RequestOrderByInput], skip: Int, take: Int, where: RequestWhereInput): Int!
+  findManyStory(cursor: StoryWhereUniqueInput, distinct: StoryScalarFieldEnum, orderBy: [StoryOrderByInput], skip: Int, take: Int, where: StoryWhereInput): [Story!]!
+  findManyStoryCount(cursor: StoryWhereUniqueInput, distinct: StoryScalarFieldEnum, orderBy: [StoryOrderByInput], skip: Int, take: Int, where: StoryWhereInput): Int!
   findManyUser(cursor: UserWhereUniqueInput, distinct: UserScalarFieldEnum, orderBy: [UserOrderByInput], skip: Int, take: Int, where: UserWhereInput): [User!]!
   findManyUserCount(cursor: UserWhereUniqueInput, distinct: UserScalarFieldEnum, orderBy: [UserOrderByInput], skip: Int, take: Int, where: UserWhereInput): Int!
+  findUniqueCollection(where: CollectionWhereUniqueInput!): Collection
+  findUniqueComment(where: CommentWhereUniqueInput!): Comment
+  findUniqueItem(where: ItemWhereUniqueInput!): Item
   findUniqueLoginToken(where: LoginTokenWhereUniqueInput!): LoginToken
   findUniqueRefreshToken(where: RefreshTokenWhereUniqueInput!): RefreshToken
+  findUniqueRequest(where: RequestWhereUniqueInput!): Request
+  findUniqueStory(where: StoryWhereUniqueInput!): Story
   findUniqueUser(where: UserWhereUniqueInput!): User
+  getFilters(modelName: String!, pagesPath: String!): JSON
   me: User
+  permission: JSON
 }
 
 enum QueryMode {
@@ -811,17 +1767,12 @@ type RefreshToken {
   geo: Json!
   ip: String!
   lastActive: DateTime!
-  loginTokenId: Int!
+  loginTokenId: String!
   user: User!
   userAgent: String!
   userAgentRaw: String!
-  userId: Int!
+  userId: String!
   value: String!
-}
-
-type RefreshTokenAvgAggregateOutputType {
-  loginTokenId: Float
-  userId: Float
 }
 
 type RefreshTokenCountAggregateOutputType {
@@ -844,7 +1795,7 @@ input RefreshTokenCreateInput {
   geo: Json!
   ip: String!
   lastActive: DateTime
-  loginTokenId: Int!
+  loginTokenId: String!
   user: UserCreateNestedOneWithoutRefreshTokensInput!
   userAgent: String!
   userAgentRaw: String!
@@ -857,10 +1808,10 @@ input RefreshTokenCreateManyInput {
   geo: Json!
   ip: String!
   lastActive: DateTime
-  loginTokenId: Int!
+  loginTokenId: String!
   userAgent: String!
   userAgentRaw: String!
-  userId: Int!
+  userId: String!
   value: String!
 }
 
@@ -870,7 +1821,7 @@ input RefreshTokenCreateManyUserInput {
   geo: Json!
   ip: String!
   lastActive: DateTime
-  loginTokenId: Int!
+  loginTokenId: String!
   userAgent: String!
   userAgentRaw: String!
   value: String!
@@ -899,7 +1850,7 @@ input RefreshTokenCreateWithoutUserInput {
   geo: Json!
   ip: String!
   lastActive: DateTime
-  loginTokenId: Int!
+  loginTokenId: String!
   userAgent: String!
   userAgentRaw: String!
   value: String!
@@ -916,10 +1867,10 @@ type RefreshTokenMaxAggregateOutputType {
   expires: DateTime
   ip: String
   lastActive: DateTime
-  loginTokenId: Int
+  loginTokenId: String
   userAgent: String
   userAgentRaw: String
-  userId: Int
+  userId: String
   value: String
 }
 
@@ -928,10 +1879,10 @@ type RefreshTokenMinAggregateOutputType {
   expires: DateTime
   ip: String
   lastActive: DateTime
-  loginTokenId: Int
+  loginTokenId: String
   userAgent: String
   userAgentRaw: String
-  userId: Int
+  userId: String
   value: String
 }
 
@@ -970,10 +1921,10 @@ input RefreshTokenScalarWhereInput {
   geo: JsonFilter
   ip: StringFilter
   lastActive: DateTimeFilter
-  loginTokenId: IntFilter
+  loginTokenId: StringFilter
   userAgent: StringFilter
   userAgentRaw: StringFilter
-  userId: IntFilter
+  userId: StringFilter
   value: StringFilter
 }
 
@@ -986,16 +1937,11 @@ input RefreshTokenScalarWhereWithAggregatesInput {
   geo: JsonWithAggregatesFilter
   ip: StringWithAggregatesFilter
   lastActive: DateTimeWithAggregatesFilter
-  loginTokenId: IntWithAggregatesFilter
+  loginTokenId: StringWithAggregatesFilter
   userAgent: StringWithAggregatesFilter
   userAgentRaw: StringWithAggregatesFilter
-  userId: IntWithAggregatesFilter
+  userId: StringWithAggregatesFilter
   value: StringWithAggregatesFilter
-}
-
-type RefreshTokenSumAggregateOutputType {
-  loginTokenId: Int
-  userId: Int
 }
 
 input RefreshTokenUncheckedCreateInput {
@@ -1004,10 +1950,10 @@ input RefreshTokenUncheckedCreateInput {
   geo: Json!
   ip: String!
   lastActive: DateTime
-  loginTokenId: Int!
+  loginTokenId: String!
   userAgent: String!
   userAgentRaw: String!
-  userId: Int!
+  userId: String!
   value: String!
 }
 
@@ -1024,7 +1970,7 @@ input RefreshTokenUncheckedCreateWithoutUserInput {
   geo: Json!
   ip: String!
   lastActive: DateTime
-  loginTokenId: Int!
+  loginTokenId: String!
   userAgent: String!
   userAgentRaw: String!
   value: String!
@@ -1036,10 +1982,10 @@ input RefreshTokenUncheckedUpdateInput {
   geo: Json
   ip: StringFieldUpdateOperationsInput
   lastActive: DateTimeFieldUpdateOperationsInput
-  loginTokenId: IntFieldUpdateOperationsInput
+  loginTokenId: StringFieldUpdateOperationsInput
   userAgent: StringFieldUpdateOperationsInput
   userAgentRaw: StringFieldUpdateOperationsInput
-  userId: IntFieldUpdateOperationsInput
+  userId: StringFieldUpdateOperationsInput
   value: StringFieldUpdateOperationsInput
 }
 
@@ -1049,10 +1995,10 @@ input RefreshTokenUncheckedUpdateManyInput {
   geo: Json
   ip: StringFieldUpdateOperationsInput
   lastActive: DateTimeFieldUpdateOperationsInput
-  loginTokenId: IntFieldUpdateOperationsInput
+  loginTokenId: StringFieldUpdateOperationsInput
   userAgent: StringFieldUpdateOperationsInput
   userAgentRaw: StringFieldUpdateOperationsInput
-  userId: IntFieldUpdateOperationsInput
+  userId: StringFieldUpdateOperationsInput
   value: StringFieldUpdateOperationsInput
 }
 
@@ -1062,7 +2008,7 @@ input RefreshTokenUncheckedUpdateManyWithoutRefreshTokensInput {
   geo: Json
   ip: StringFieldUpdateOperationsInput
   lastActive: DateTimeFieldUpdateOperationsInput
-  loginTokenId: IntFieldUpdateOperationsInput
+  loginTokenId: StringFieldUpdateOperationsInput
   userAgent: StringFieldUpdateOperationsInput
   userAgentRaw: StringFieldUpdateOperationsInput
   value: StringFieldUpdateOperationsInput
@@ -1088,7 +2034,7 @@ input RefreshTokenUncheckedUpdateWithoutUserInput {
   geo: Json
   ip: StringFieldUpdateOperationsInput
   lastActive: DateTimeFieldUpdateOperationsInput
-  loginTokenId: IntFieldUpdateOperationsInput
+  loginTokenId: StringFieldUpdateOperationsInput
   userAgent: StringFieldUpdateOperationsInput
   userAgentRaw: StringFieldUpdateOperationsInput
   value: StringFieldUpdateOperationsInput
@@ -1100,7 +2046,7 @@ input RefreshTokenUpdateInput {
   geo: Json
   ip: StringFieldUpdateOperationsInput
   lastActive: DateTimeFieldUpdateOperationsInput
-  loginTokenId: IntFieldUpdateOperationsInput
+  loginTokenId: StringFieldUpdateOperationsInput
   user: UserUpdateOneRequiredWithoutRefreshTokensInput
   userAgent: StringFieldUpdateOperationsInput
   userAgentRaw: StringFieldUpdateOperationsInput
@@ -1113,7 +2059,7 @@ input RefreshTokenUpdateManyMutationInput {
   geo: Json
   ip: StringFieldUpdateOperationsInput
   lastActive: DateTimeFieldUpdateOperationsInput
-  loginTokenId: IntFieldUpdateOperationsInput
+  loginTokenId: StringFieldUpdateOperationsInput
   userAgent: StringFieldUpdateOperationsInput
   userAgentRaw: StringFieldUpdateOperationsInput
   value: StringFieldUpdateOperationsInput
@@ -1149,7 +2095,7 @@ input RefreshTokenUpdateWithoutUserInput {
   geo: Json
   ip: StringFieldUpdateOperationsInput
   lastActive: DateTimeFieldUpdateOperationsInput
-  loginTokenId: IntFieldUpdateOperationsInput
+  loginTokenId: StringFieldUpdateOperationsInput
   userAgent: StringFieldUpdateOperationsInput
   userAgentRaw: StringFieldUpdateOperationsInput
   value: StringFieldUpdateOperationsInput
@@ -1170,21 +2116,804 @@ input RefreshTokenWhereInput {
   geo: JsonFilter
   ip: StringFilter
   lastActive: DateTimeFilter
-  loginTokenId: IntFilter
+  loginTokenId: StringFilter
   user: UserWhereInput
   userAgent: StringFilter
   userAgentRaw: StringFilter
-  userId: IntFilter
+  userId: StringFilter
   value: StringFilter
 }
 
 input RefreshTokenWhereUniqueInput {
-  loginTokenId: Int
+  loginTokenId: String
+}
+
+type Request {
+  comments(cursor: CommentWhereUniqueInput, distinct: CommentScalarFieldEnum, orderBy: CommentOrderByInput, skip: Int, take: Int, where: CommentWhereInput): [Comment!]!
+  endDate: DateTime
+  id: String!
+  name: String!
+  startDate: DateTime
+  story: Story!
+  storyId: String!
+}
+
+type RequestCountAggregateOutputType {
+  _all: Int!
+  endDate: Int!
+  id: Int!
+  name: Int!
+  startDate: Int!
+  storyId: Int!
+}
+
+input RequestCreateInput {
+  comments: CommentCreateNestedManyWithoutRequestInput
+  endDate: DateTime
+  id: String
+  name: String!
+  startDate: DateTime
+  story: StoryCreateNestedOneWithoutRequestsInput!
+}
+
+input RequestCreateManyInput {
+  endDate: DateTime
+  id: String
+  name: String!
+  startDate: DateTime
+  storyId: String!
+}
+
+input RequestCreateManyStoryInput {
+  endDate: DateTime
+  id: String
+  name: String!
+  startDate: DateTime
+}
+
+input RequestCreateManyStoryInputEnvelope {
+  data: RequestCreateManyStoryInput!
+  skipDuplicates: Boolean
+}
+
+input RequestCreateNestedManyWithoutStoryInput {
+  connect: [RequestWhereUniqueInput]
+  connectOrCreate: [RequestCreateOrConnectWithoutStoryInput]
+  create: [RequestCreateWithoutStoryInput]
+  createMany: RequestCreateManyStoryInputEnvelope
+}
+
+input RequestCreateNestedOneWithoutCommentsInput {
+  connect: RequestWhereUniqueInput
+  connectOrCreate: RequestCreateOrConnectWithoutCommentsInput
+  create: RequestUncheckedCreateWithoutCommentsInput
+}
+
+input RequestCreateOrConnectWithoutCommentsInput {
+  create: RequestUncheckedCreateWithoutCommentsInput!
+  where: RequestWhereUniqueInput!
+}
+
+input RequestCreateOrConnectWithoutStoryInput {
+  create: RequestUncheckedCreateWithoutStoryInput!
+  where: RequestWhereUniqueInput!
+}
+
+input RequestCreateWithoutCommentsInput {
+  endDate: DateTime
+  id: String
+  name: String!
+  startDate: DateTime
+  story: StoryCreateNestedOneWithoutRequestsInput!
+}
+
+input RequestCreateWithoutStoryInput {
+  comments: CommentCreateNestedManyWithoutRequestInput
+  endDate: DateTime
+  id: String
+  name: String!
+  startDate: DateTime
+}
+
+input RequestListRelationFilter {
+  every: RequestWhereInput
+  none: RequestWhereInput
+  some: RequestWhereInput
+}
+
+type RequestMaxAggregateOutputType {
+  endDate: DateTime
+  id: String
+  name: String
+  startDate: DateTime
+  storyId: String
+}
+
+type RequestMinAggregateOutputType {
+  endDate: DateTime
+  id: String
+  name: String
+  startDate: DateTime
+  storyId: String
+}
+
+input RequestOrderByInput {
+  endDate: SortOrder
+  id: SortOrder
+  name: SortOrder
+  startDate: SortOrder
+  storyId: SortOrder
+}
+
+input RequestRelationFilter {
+  is: RequestWhereInput
+  isNot: RequestWhereInput
+}
+
+enum RequestScalarFieldEnum {
+  endDate
+  id
+  name
+  startDate
+  storyId
+}
+
+input RequestScalarWhereInput {
+  AND: [RequestScalarWhereInput]
+  NOT: [RequestScalarWhereInput]
+  OR: [RequestScalarWhereInput]
+  endDate: DateTimeNullableFilter
+  id: StringFilter
+  name: StringFilter
+  startDate: DateTimeNullableFilter
+  storyId: StringFilter
+}
+
+input RequestScalarWhereWithAggregatesInput {
+  AND: [RequestScalarWhereWithAggregatesInput]
+  NOT: [RequestScalarWhereWithAggregatesInput]
+  OR: [RequestScalarWhereWithAggregatesInput]
+  endDate: DateTimeNullableWithAggregatesFilter
+  id: StringWithAggregatesFilter
+  name: StringWithAggregatesFilter
+  startDate: DateTimeNullableWithAggregatesFilter
+  storyId: StringWithAggregatesFilter
+}
+
+input RequestUncheckedCreateInput {
+  comments: CommentUncheckedCreateNestedManyWithoutRequestInput
+  endDate: DateTime
+  id: String
+  name: String!
+  startDate: DateTime
+  storyId: String!
+}
+
+input RequestUncheckedCreateNestedManyWithoutStoryInput {
+  connect: [RequestWhereUniqueInput]
+  connectOrCreate: [RequestCreateOrConnectWithoutStoryInput]
+  create: [RequestCreateWithoutStoryInput]
+  createMany: RequestCreateManyStoryInputEnvelope
+}
+
+input RequestUncheckedCreateWithoutCommentsInput {
+  endDate: DateTime
+  id: String
+  name: String!
+  startDate: DateTime
+  storyId: String!
+}
+
+input RequestUncheckedCreateWithoutStoryInput {
+  comments: CommentUncheckedCreateNestedManyWithoutRequestInput
+  endDate: DateTime
+  id: String
+  name: String!
+  startDate: DateTime
+}
+
+input RequestUncheckedUpdateInput {
+  comments: CommentUncheckedUpdateManyWithoutRequestInput
+  endDate: NullableDateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  startDate: NullableDateTimeFieldUpdateOperationsInput
+  storyId: StringFieldUpdateOperationsInput
+}
+
+input RequestUncheckedUpdateManyInput {
+  endDate: NullableDateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  startDate: NullableDateTimeFieldUpdateOperationsInput
+  storyId: StringFieldUpdateOperationsInput
+}
+
+input RequestUncheckedUpdateManyWithoutRequestsInput {
+  endDate: NullableDateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  startDate: NullableDateTimeFieldUpdateOperationsInput
+}
+
+input RequestUncheckedUpdateManyWithoutStoryInput {
+  connect: [RequestWhereUniqueInput]
+  connectOrCreate: [RequestCreateOrConnectWithoutStoryInput]
+  create: [RequestCreateWithoutStoryInput]
+  createMany: RequestCreateManyStoryInputEnvelope
+  delete: [RequestWhereUniqueInput]
+  deleteMany: [RequestScalarWhereInput]
+  disconnect: [RequestWhereUniqueInput]
+  set: [RequestWhereUniqueInput]
+  update: [RequestUpdateWithWhereUniqueWithoutStoryInput]
+  updateMany: [RequestUpdateManyWithWhereWithoutStoryInput]
+  upsert: [RequestUpsertWithWhereUniqueWithoutStoryInput]
+}
+
+input RequestUncheckedUpdateWithoutCommentsInput {
+  endDate: NullableDateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  startDate: NullableDateTimeFieldUpdateOperationsInput
+  storyId: StringFieldUpdateOperationsInput
+}
+
+input RequestUncheckedUpdateWithoutStoryInput {
+  comments: CommentUncheckedUpdateManyWithoutRequestInput
+  endDate: NullableDateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  startDate: NullableDateTimeFieldUpdateOperationsInput
+}
+
+input RequestUpdateInput {
+  comments: CommentUpdateManyWithoutRequestInput
+  endDate: NullableDateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  startDate: NullableDateTimeFieldUpdateOperationsInput
+  story: StoryUpdateOneRequiredWithoutRequestsInput
+}
+
+input RequestUpdateManyMutationInput {
+  endDate: NullableDateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  startDate: NullableDateTimeFieldUpdateOperationsInput
+}
+
+input RequestUpdateManyWithWhereWithoutStoryInput {
+  data: RequestUncheckedUpdateManyWithoutRequestsInput!
+  where: RequestScalarWhereInput!
+}
+
+input RequestUpdateManyWithoutStoryInput {
+  connect: [RequestWhereUniqueInput]
+  connectOrCreate: [RequestCreateOrConnectWithoutStoryInput]
+  create: [RequestCreateWithoutStoryInput]
+  createMany: RequestCreateManyStoryInputEnvelope
+  delete: [RequestWhereUniqueInput]
+  deleteMany: [RequestScalarWhereInput]
+  disconnect: [RequestWhereUniqueInput]
+  set: [RequestWhereUniqueInput]
+  update: [RequestUpdateWithWhereUniqueWithoutStoryInput]
+  updateMany: [RequestUpdateManyWithWhereWithoutStoryInput]
+  upsert: [RequestUpsertWithWhereUniqueWithoutStoryInput]
+}
+
+input RequestUpdateOneRequiredWithoutCommentsInput {
+  connect: RequestWhereUniqueInput
+  connectOrCreate: RequestCreateOrConnectWithoutCommentsInput
+  create: RequestUncheckedCreateWithoutCommentsInput
+  update: RequestUncheckedUpdateWithoutCommentsInput
+  upsert: RequestUpsertWithoutCommentsInput
+}
+
+input RequestUpdateWithWhereUniqueWithoutStoryInput {
+  data: RequestUncheckedUpdateWithoutStoryInput!
+  where: RequestWhereUniqueInput!
+}
+
+input RequestUpdateWithoutCommentsInput {
+  endDate: NullableDateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  startDate: NullableDateTimeFieldUpdateOperationsInput
+  story: StoryUpdateOneRequiredWithoutRequestsInput
+}
+
+input RequestUpdateWithoutStoryInput {
+  comments: CommentUpdateManyWithoutRequestInput
+  endDate: NullableDateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  startDate: NullableDateTimeFieldUpdateOperationsInput
+}
+
+input RequestUpsertWithWhereUniqueWithoutStoryInput {
+  create: RequestUncheckedCreateWithoutStoryInput!
+  update: RequestUncheckedUpdateWithoutStoryInput!
+  where: RequestWhereUniqueInput!
+}
+
+input RequestUpsertWithoutCommentsInput {
+  create: RequestUncheckedCreateWithoutCommentsInput!
+  update: RequestUncheckedUpdateWithoutCommentsInput!
+}
+
+input RequestWhereInput {
+  AND: [RequestWhereInput]
+  NOT: [RequestWhereInput]
+  OR: [RequestWhereInput]
+  comments: CommentListRelationFilter
+  endDate: DateTimeNullableFilter
+  id: StringFilter
+  name: StringFilter
+  startDate: DateTimeNullableFilter
+  story: StoryWhereInput
+  storyId: StringFilter
+}
+
+input RequestWhereUniqueInput {
+  id: String
 }
 
 enum SortOrder {
   asc
   desc
+}
+
+type Story {
+  collection: Collection!
+  collectionId: String!
+  description: String
+  doImage: Json
+  id: String!
+  itemIds: [String!]!
+  items(cursor: ItemWhereUniqueInput, distinct: ItemScalarFieldEnum, orderBy: ItemOrderByInput, skip: Int, take: Int, where: ItemWhereInput): [Item!]!
+  name: String!
+  requests(cursor: RequestWhereUniqueInput, distinct: RequestScalarFieldEnum, orderBy: RequestOrderByInput, skip: Int, take: Int, where: RequestWhereInput): [Request!]!
+}
+
+type StoryCountAggregateOutputType {
+  _all: Int!
+  collectionId: Int!
+  description: Int!
+  doImage: Int!
+  id: Int!
+  itemIds: Int!
+  name: Int!
+}
+
+input StoryCreateInput {
+  collection: CollectionCreateNestedOneWithoutStoriesInput!
+  description: String
+  doImage: Json
+  id: String
+  itemIds: [String]
+  items: ItemCreateNestedManyWithoutStoriesInput
+  name: String!
+  requests: RequestCreateNestedManyWithoutStoryInput
+}
+
+input StoryCreateManyCollectionInput {
+  description: String
+  doImage: Json
+  id: String
+  itemIds: [String]
+  name: String!
+}
+
+input StoryCreateManyCollectionInputEnvelope {
+  data: StoryCreateManyCollectionInput!
+  skipDuplicates: Boolean
+}
+
+input StoryCreateManyInput {
+  collectionId: String!
+  description: String
+  doImage: Json
+  id: String
+  itemIds: [String]
+  name: String!
+}
+
+input StoryCreateManyitemIdsInput {
+  set: String!
+}
+
+input StoryCreateNestedManyWithoutCollectionInput {
+  connect: [StoryWhereUniqueInput]
+  connectOrCreate: [StoryCreateOrConnectWithoutCollectionInput]
+  create: [StoryCreateWithoutCollectionInput]
+  createMany: StoryCreateManyCollectionInputEnvelope
+}
+
+input StoryCreateNestedManyWithoutItemsInput {
+  connect: [StoryWhereUniqueInput]
+  connectOrCreate: [StoryCreateOrConnectWithoutItemsInput]
+  create: [StoryCreateWithoutItemsInput]
+}
+
+input StoryCreateNestedOneWithoutRequestsInput {
+  connect: StoryWhereUniqueInput
+  connectOrCreate: StoryCreateOrConnectWithoutRequestsInput
+  create: StoryUncheckedCreateWithoutRequestsInput
+}
+
+input StoryCreateOrConnectWithoutCollectionInput {
+  create: StoryUncheckedCreateWithoutCollectionInput!
+  where: StoryWhereUniqueInput!
+}
+
+input StoryCreateOrConnectWithoutItemsInput {
+  create: StoryUncheckedCreateWithoutItemsInput!
+  where: StoryWhereUniqueInput!
+}
+
+input StoryCreateOrConnectWithoutRequestsInput {
+  create: StoryUncheckedCreateWithoutRequestsInput!
+  where: StoryWhereUniqueInput!
+}
+
+input StoryCreateWithoutCollectionInput {
+  description: String
+  doImage: Json
+  id: String
+  itemIds: [String]
+  items: ItemCreateNestedManyWithoutStoriesInput
+  name: String!
+  requests: RequestCreateNestedManyWithoutStoryInput
+}
+
+input StoryCreateWithoutItemsInput {
+  collection: CollectionCreateNestedOneWithoutStoriesInput!
+  description: String
+  doImage: Json
+  id: String
+  itemIds: [String]
+  name: String!
+  requests: RequestCreateNestedManyWithoutStoryInput
+}
+
+input StoryCreateWithoutRequestsInput {
+  collection: CollectionCreateNestedOneWithoutStoriesInput!
+  description: String
+  doImage: Json
+  id: String
+  itemIds: [String]
+  items: ItemCreateNestedManyWithoutStoriesInput
+  name: String!
+}
+
+input StoryCreateitemIdsInput {
+  set: String!
+}
+
+input StoryListRelationFilter {
+  every: StoryWhereInput
+  none: StoryWhereInput
+  some: StoryWhereInput
+}
+
+type StoryMaxAggregateOutputType {
+  collectionId: String
+  description: String
+  id: String
+  name: String
+}
+
+type StoryMinAggregateOutputType {
+  collectionId: String
+  description: String
+  id: String
+  name: String
+}
+
+input StoryOrderByInput {
+  collectionId: SortOrder
+  description: SortOrder
+  doImage: SortOrder
+  id: SortOrder
+  itemIds: SortOrder
+  name: SortOrder
+}
+
+input StoryRelationFilter {
+  is: StoryWhereInput
+  isNot: StoryWhereInput
+}
+
+enum StoryScalarFieldEnum {
+  collectionId
+  description
+  doImage
+  id
+  itemIds
+  name
+}
+
+input StoryScalarWhereInput {
+  AND: [StoryScalarWhereInput]
+  NOT: [StoryScalarWhereInput]
+  OR: [StoryScalarWhereInput]
+  collectionId: StringFilter
+  description: StringNullableFilter
+  doImage: JsonNullableFilter
+  id: StringFilter
+  itemIds: StringNullableListFilter
+  name: StringFilter
+}
+
+input StoryScalarWhereWithAggregatesInput {
+  AND: [StoryScalarWhereWithAggregatesInput]
+  NOT: [StoryScalarWhereWithAggregatesInput]
+  OR: [StoryScalarWhereWithAggregatesInput]
+  collectionId: StringWithAggregatesFilter
+  description: StringNullableWithAggregatesFilter
+  doImage: JsonNullableWithAggregatesFilter
+  id: StringWithAggregatesFilter
+  itemIds: StringNullableListFilter
+  name: StringWithAggregatesFilter
+}
+
+input StoryUncheckedCreateInput {
+  collectionId: String!
+  description: String
+  doImage: Json
+  id: String
+  itemIds: [String]
+  name: String!
+  requests: RequestUncheckedCreateNestedManyWithoutStoryInput
+}
+
+input StoryUncheckedCreateNestedManyWithoutCollectionInput {
+  connect: [StoryWhereUniqueInput]
+  connectOrCreate: [StoryCreateOrConnectWithoutCollectionInput]
+  create: [StoryCreateWithoutCollectionInput]
+  createMany: StoryCreateManyCollectionInputEnvelope
+}
+
+input StoryUncheckedCreateWithoutCollectionInput {
+  description: String
+  doImage: Json
+  id: String
+  itemIds: [String]
+  name: String!
+  requests: RequestUncheckedCreateNestedManyWithoutStoryInput
+}
+
+input StoryUncheckedCreateWithoutItemsInput {
+  collectionId: String!
+  description: String
+  doImage: Json
+  id: String
+  itemIds: [String]
+  name: String!
+  requests: RequestUncheckedCreateNestedManyWithoutStoryInput
+}
+
+input StoryUncheckedCreateWithoutRequestsInput {
+  collectionId: String!
+  description: String
+  doImage: Json
+  id: String
+  itemIds: [String]
+  name: String!
+}
+
+input StoryUncheckedUpdateInput {
+  collectionId: StringFieldUpdateOperationsInput
+  description: NullableStringFieldUpdateOperationsInput
+  doImage: Json
+  id: StringFieldUpdateOperationsInput
+  itemIds: [String]
+  name: StringFieldUpdateOperationsInput
+  requests: RequestUncheckedUpdateManyWithoutStoryInput
+}
+
+input StoryUncheckedUpdateManyInput {
+  collectionId: StringFieldUpdateOperationsInput
+  description: NullableStringFieldUpdateOperationsInput
+  doImage: Json
+  id: StringFieldUpdateOperationsInput
+  itemIds: [String]
+  name: StringFieldUpdateOperationsInput
+}
+
+input StoryUncheckedUpdateManyWithoutCollectionInput {
+  connect: [StoryWhereUniqueInput]
+  connectOrCreate: [StoryCreateOrConnectWithoutCollectionInput]
+  create: [StoryCreateWithoutCollectionInput]
+  createMany: StoryCreateManyCollectionInputEnvelope
+  delete: [StoryWhereUniqueInput]
+  deleteMany: [StoryScalarWhereInput]
+  disconnect: [StoryWhereUniqueInput]
+  set: [StoryWhereUniqueInput]
+  update: [StoryUpdateWithWhereUniqueWithoutCollectionInput]
+  updateMany: [StoryUpdateManyWithWhereWithoutCollectionInput]
+  upsert: [StoryUpsertWithWhereUniqueWithoutCollectionInput]
+}
+
+input StoryUncheckedUpdateManyWithoutStoriesInput {
+  description: NullableStringFieldUpdateOperationsInput
+  doImage: Json
+  id: StringFieldUpdateOperationsInput
+  itemIds: [String]
+  name: StringFieldUpdateOperationsInput
+}
+
+input StoryUncheckedUpdateWithoutCollectionInput {
+  description: NullableStringFieldUpdateOperationsInput
+  doImage: Json
+  id: StringFieldUpdateOperationsInput
+  itemIds: [String]
+  name: StringFieldUpdateOperationsInput
+  requests: RequestUncheckedUpdateManyWithoutStoryInput
+}
+
+input StoryUncheckedUpdateWithoutItemsInput {
+  collectionId: StringFieldUpdateOperationsInput
+  description: NullableStringFieldUpdateOperationsInput
+  doImage: Json
+  id: StringFieldUpdateOperationsInput
+  itemIds: [String]
+  name: StringFieldUpdateOperationsInput
+  requests: RequestUncheckedUpdateManyWithoutStoryInput
+}
+
+input StoryUncheckedUpdateWithoutRequestsInput {
+  collectionId: StringFieldUpdateOperationsInput
+  description: NullableStringFieldUpdateOperationsInput
+  doImage: Json
+  id: StringFieldUpdateOperationsInput
+  itemIds: [String]
+  name: StringFieldUpdateOperationsInput
+}
+
+input StoryUpdateInput {
+  collection: CollectionUpdateOneRequiredWithoutStoriesInput
+  description: NullableStringFieldUpdateOperationsInput
+  doImage: Json
+  id: StringFieldUpdateOperationsInput
+  itemIds: [String]
+  items: ItemUpdateManyWithoutStoriesInput
+  name: StringFieldUpdateOperationsInput
+  requests: RequestUpdateManyWithoutStoryInput
+}
+
+input StoryUpdateManyMutationInput {
+  description: NullableStringFieldUpdateOperationsInput
+  doImage: Json
+  id: StringFieldUpdateOperationsInput
+  itemIds: [String]
+  name: StringFieldUpdateOperationsInput
+}
+
+input StoryUpdateManyWithWhereWithoutCollectionInput {
+  data: StoryUncheckedUpdateManyWithoutStoriesInput!
+  where: StoryScalarWhereInput!
+}
+
+input StoryUpdateManyWithWhereWithoutItemsInput {
+  data: StoryUncheckedUpdateManyWithoutStoriesInput!
+  where: StoryScalarWhereInput!
+}
+
+input StoryUpdateManyWithoutCollectionInput {
+  connect: [StoryWhereUniqueInput]
+  connectOrCreate: [StoryCreateOrConnectWithoutCollectionInput]
+  create: [StoryCreateWithoutCollectionInput]
+  createMany: StoryCreateManyCollectionInputEnvelope
+  delete: [StoryWhereUniqueInput]
+  deleteMany: [StoryScalarWhereInput]
+  disconnect: [StoryWhereUniqueInput]
+  set: [StoryWhereUniqueInput]
+  update: [StoryUpdateWithWhereUniqueWithoutCollectionInput]
+  updateMany: [StoryUpdateManyWithWhereWithoutCollectionInput]
+  upsert: [StoryUpsertWithWhereUniqueWithoutCollectionInput]
+}
+
+input StoryUpdateManyWithoutItemsInput {
+  connect: [StoryWhereUniqueInput]
+  connectOrCreate: [StoryCreateOrConnectWithoutItemsInput]
+  create: [StoryCreateWithoutItemsInput]
+  delete: [StoryWhereUniqueInput]
+  deleteMany: [StoryScalarWhereInput]
+  disconnect: [StoryWhereUniqueInput]
+  set: [StoryWhereUniqueInput]
+  update: [StoryUpdateWithWhereUniqueWithoutItemsInput]
+  updateMany: [StoryUpdateManyWithWhereWithoutItemsInput]
+  upsert: [StoryUpsertWithWhereUniqueWithoutItemsInput]
+}
+
+input StoryUpdateOneRequiredWithoutRequestsInput {
+  connect: StoryWhereUniqueInput
+  connectOrCreate: StoryCreateOrConnectWithoutRequestsInput
+  create: StoryUncheckedCreateWithoutRequestsInput
+  update: StoryUncheckedUpdateWithoutRequestsInput
+  upsert: StoryUpsertWithoutRequestsInput
+}
+
+input StoryUpdateWithWhereUniqueWithoutCollectionInput {
+  data: StoryUncheckedUpdateWithoutCollectionInput!
+  where: StoryWhereUniqueInput!
+}
+
+input StoryUpdateWithWhereUniqueWithoutItemsInput {
+  data: StoryUncheckedUpdateWithoutItemsInput!
+  where: StoryWhereUniqueInput!
+}
+
+input StoryUpdateWithoutCollectionInput {
+  description: NullableStringFieldUpdateOperationsInput
+  doImage: Json
+  id: StringFieldUpdateOperationsInput
+  itemIds: [String]
+  items: ItemUpdateManyWithoutStoriesInput
+  name: StringFieldUpdateOperationsInput
+  requests: RequestUpdateManyWithoutStoryInput
+}
+
+input StoryUpdateWithoutItemsInput {
+  collection: CollectionUpdateOneRequiredWithoutStoriesInput
+  description: NullableStringFieldUpdateOperationsInput
+  doImage: Json
+  id: StringFieldUpdateOperationsInput
+  itemIds: [String]
+  name: StringFieldUpdateOperationsInput
+  requests: RequestUpdateManyWithoutStoryInput
+}
+
+input StoryUpdateWithoutRequestsInput {
+  collection: CollectionUpdateOneRequiredWithoutStoriesInput
+  description: NullableStringFieldUpdateOperationsInput
+  doImage: Json
+  id: StringFieldUpdateOperationsInput
+  itemIds: [String]
+  items: ItemUpdateManyWithoutStoriesInput
+  name: StringFieldUpdateOperationsInput
+}
+
+input StoryUpdateitemIdsInput {
+  push: [String]
+  set: [String]
+}
+
+input StoryUpsertWithWhereUniqueWithoutCollectionInput {
+  create: StoryUncheckedCreateWithoutCollectionInput!
+  update: StoryUncheckedUpdateWithoutCollectionInput!
+  where: StoryWhereUniqueInput!
+}
+
+input StoryUpsertWithWhereUniqueWithoutItemsInput {
+  create: StoryUncheckedCreateWithoutItemsInput!
+  update: StoryUncheckedUpdateWithoutItemsInput!
+  where: StoryWhereUniqueInput!
+}
+
+input StoryUpsertWithoutRequestsInput {
+  create: StoryUncheckedCreateWithoutRequestsInput!
+  update: StoryUncheckedUpdateWithoutRequestsInput!
+}
+
+input StoryWhereInput {
+  AND: [StoryWhereInput]
+  NOT: [StoryWhereInput]
+  OR: [StoryWhereInput]
+  collection: CollectionWhereInput
+  collectionId: StringFilter
+  description: StringNullableFilter
+  doImage: JsonNullableFilter
+  id: StringFilter
+  itemIds: StringNullableListFilter
+  items: ItemListRelationFilter
+  name: StringFilter
+  requests: RequestListRelationFilter
+}
+
+input StoryWhereUniqueInput {
+  id: String
 }
 
 input StringFieldUpdateOperationsInput {
@@ -1219,6 +2948,14 @@ input StringNullableFilter {
   not: NestedStringNullableFilter
   notIn: [String]
   startsWith: String
+}
+
+input StringNullableListFilter {
+  equals: [String]
+  has: String
+  hasEvery: [String]
+  hasSome: [String]
+  isEmpty: Boolean
 }
 
 input StringNullableWithAggregatesFilter {
@@ -1264,9 +3001,11 @@ input StringWithAggregatesFilter {
 }
 
 type User {
+  comments(cursor: CommentWhereUniqueInput, distinct: CommentScalarFieldEnum, orderBy: CommentOrderByInput, skip: Int, take: Int, where: CommentWhereInput): [Comment!]!
   createdAt: DateTime!
+  doImage: Json
   email: String!
-  id: Int!
+  id: String!
   loginTokens(cursor: LoginTokenWhereUniqueInput, distinct: LoginTokenScalarFieldEnum, orderBy: LoginTokenOrderByInput, skip: Int, take: Int, where: LoginTokenWhereInput): [LoginToken!]!
   name: String
   password: String
@@ -1274,13 +3013,10 @@ type User {
   updatedAt: DateTime!
 }
 
-type UserAvgAggregateOutputType {
-  id: Float
-}
-
 type UserCountAggregateOutputType {
   _all: Int!
   createdAt: Int!
+  doImage: Int!
   email: Int!
   id: Int!
   name: Int!
@@ -1289,8 +3025,11 @@ type UserCountAggregateOutputType {
 }
 
 input UserCreateInput {
+  comments: CommentCreateNestedManyWithoutUserInput
   createdAt: DateTime
+  doImage: Json
   email: String!
+  id: String
   loginTokens: LoginTokenCreateNestedManyWithoutUserInput
   name: String
   password: String
@@ -1300,11 +3039,18 @@ input UserCreateInput {
 
 input UserCreateManyInput {
   createdAt: DateTime
+  doImage: Json
   email: String!
-  id: Int
+  id: String
   name: String
   password: String
   updatedAt: DateTime
+}
+
+input UserCreateNestedOneWithoutCommentsInput {
+  connect: UserWhereUniqueInput
+  connectOrCreate: UserCreateOrConnectWithoutCommentsInput
+  create: UserUncheckedCreateWithoutCommentsInput
 }
 
 input UserCreateNestedOneWithoutLoginTokensInput {
@@ -1319,6 +3065,11 @@ input UserCreateNestedOneWithoutRefreshTokensInput {
   create: UserUncheckedCreateWithoutRefreshTokensInput
 }
 
+input UserCreateOrConnectWithoutCommentsInput {
+  create: UserUncheckedCreateWithoutCommentsInput!
+  where: UserWhereUniqueInput!
+}
+
 input UserCreateOrConnectWithoutLoginTokensInput {
   create: UserUncheckedCreateWithoutLoginTokensInput!
   where: UserWhereUniqueInput!
@@ -1329,9 +3080,24 @@ input UserCreateOrConnectWithoutRefreshTokensInput {
   where: UserWhereUniqueInput!
 }
 
-input UserCreateWithoutLoginTokensInput {
+input UserCreateWithoutCommentsInput {
   createdAt: DateTime
+  doImage: Json
   email: String!
+  id: String
+  loginTokens: LoginTokenCreateNestedManyWithoutUserInput
+  name: String
+  password: String
+  refreshTokens: RefreshTokenCreateNestedManyWithoutUserInput
+  updatedAt: DateTime
+}
+
+input UserCreateWithoutLoginTokensInput {
+  comments: CommentCreateNestedManyWithoutUserInput
+  createdAt: DateTime
+  doImage: Json
+  email: String!
+  id: String
   name: String
   password: String
   refreshTokens: RefreshTokenCreateNestedManyWithoutUserInput
@@ -1339,8 +3105,11 @@ input UserCreateWithoutLoginTokensInput {
 }
 
 input UserCreateWithoutRefreshTokensInput {
+  comments: CommentCreateNestedManyWithoutUserInput
   createdAt: DateTime
+  doImage: Json
   email: String!
+  id: String
   loginTokens: LoginTokenCreateNestedManyWithoutUserInput
   name: String
   password: String
@@ -1350,7 +3119,7 @@ input UserCreateWithoutRefreshTokensInput {
 type UserMaxAggregateOutputType {
   createdAt: DateTime
   email: String
-  id: Int
+  id: String
   name: String
   password: String
   updatedAt: DateTime
@@ -1359,7 +3128,7 @@ type UserMaxAggregateOutputType {
 type UserMinAggregateOutputType {
   createdAt: DateTime
   email: String
-  id: Int
+  id: String
   name: String
   password: String
   updatedAt: DateTime
@@ -1367,6 +3136,7 @@ type UserMinAggregateOutputType {
 
 input UserOrderByInput {
   createdAt: SortOrder
+  doImage: SortOrder
   email: SortOrder
   id: SortOrder
   name: SortOrder
@@ -1381,6 +3151,7 @@ input UserRelationFilter {
 
 enum UserScalarFieldEnum {
   createdAt
+  doImage
   email
   id
   name
@@ -1393,21 +3164,32 @@ input UserScalarWhereWithAggregatesInput {
   NOT: [UserScalarWhereWithAggregatesInput]
   OR: [UserScalarWhereWithAggregatesInput]
   createdAt: DateTimeWithAggregatesFilter
+  doImage: JsonNullableWithAggregatesFilter
   email: StringWithAggregatesFilter
-  id: IntWithAggregatesFilter
+  id: StringWithAggregatesFilter
   name: StringNullableWithAggregatesFilter
   password: StringNullableWithAggregatesFilter
   updatedAt: DateTimeWithAggregatesFilter
 }
 
-type UserSumAggregateOutputType {
-  id: Int
+input UserUncheckedCreateInput {
+  comments: CommentUncheckedCreateNestedManyWithoutUserInput
+  createdAt: DateTime
+  doImage: Json
+  email: String!
+  id: String
+  loginTokens: LoginTokenUncheckedCreateNestedManyWithoutUserInput
+  name: String
+  password: String
+  refreshTokens: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  updatedAt: DateTime
 }
 
-input UserUncheckedCreateInput {
+input UserUncheckedCreateWithoutCommentsInput {
   createdAt: DateTime
+  doImage: Json
   email: String!
-  id: Int
+  id: String
   loginTokens: LoginTokenUncheckedCreateNestedManyWithoutUserInput
   name: String
   password: String
@@ -1416,9 +3198,11 @@ input UserUncheckedCreateInput {
 }
 
 input UserUncheckedCreateWithoutLoginTokensInput {
+  comments: CommentUncheckedCreateNestedManyWithoutUserInput
   createdAt: DateTime
+  doImage: Json
   email: String!
-  id: Int
+  id: String
   name: String
   password: String
   refreshTokens: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
@@ -1426,9 +3210,11 @@ input UserUncheckedCreateWithoutLoginTokensInput {
 }
 
 input UserUncheckedCreateWithoutRefreshTokensInput {
+  comments: CommentUncheckedCreateNestedManyWithoutUserInput
   createdAt: DateTime
+  doImage: Json
   email: String!
-  id: Int
+  id: String
   loginTokens: LoginTokenUncheckedCreateNestedManyWithoutUserInput
   name: String
   password: String
@@ -1436,9 +3222,11 @@ input UserUncheckedCreateWithoutRefreshTokensInput {
 }
 
 input UserUncheckedUpdateInput {
+  comments: CommentUncheckedUpdateManyWithoutUserInput
   createdAt: DateTimeFieldUpdateOperationsInput
+  doImage: Json
   email: StringFieldUpdateOperationsInput
-  id: IntFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
   loginTokens: LoginTokenUncheckedUpdateManyWithoutUserInput
   name: NullableStringFieldUpdateOperationsInput
   password: NullableStringFieldUpdateOperationsInput
@@ -1448,17 +3236,32 @@ input UserUncheckedUpdateInput {
 
 input UserUncheckedUpdateManyInput {
   createdAt: DateTimeFieldUpdateOperationsInput
+  doImage: Json
   email: StringFieldUpdateOperationsInput
-  id: IntFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
   name: NullableStringFieldUpdateOperationsInput
   password: NullableStringFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
 
-input UserUncheckedUpdateWithoutLoginTokensInput {
+input UserUncheckedUpdateWithoutCommentsInput {
   createdAt: DateTimeFieldUpdateOperationsInput
+  doImage: Json
   email: StringFieldUpdateOperationsInput
-  id: IntFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  loginTokens: LoginTokenUncheckedUpdateManyWithoutUserInput
+  name: NullableStringFieldUpdateOperationsInput
+  password: NullableStringFieldUpdateOperationsInput
+  refreshTokens: RefreshTokenUncheckedUpdateManyWithoutUserInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input UserUncheckedUpdateWithoutLoginTokensInput {
+  comments: CommentUncheckedUpdateManyWithoutUserInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  doImage: Json
+  email: StringFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
   name: NullableStringFieldUpdateOperationsInput
   password: NullableStringFieldUpdateOperationsInput
   refreshTokens: RefreshTokenUncheckedUpdateManyWithoutUserInput
@@ -1466,9 +3269,11 @@ input UserUncheckedUpdateWithoutLoginTokensInput {
 }
 
 input UserUncheckedUpdateWithoutRefreshTokensInput {
+  comments: CommentUncheckedUpdateManyWithoutUserInput
   createdAt: DateTimeFieldUpdateOperationsInput
+  doImage: Json
   email: StringFieldUpdateOperationsInput
-  id: IntFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
   loginTokens: LoginTokenUncheckedUpdateManyWithoutUserInput
   name: NullableStringFieldUpdateOperationsInput
   password: NullableStringFieldUpdateOperationsInput
@@ -1476,8 +3281,11 @@ input UserUncheckedUpdateWithoutRefreshTokensInput {
 }
 
 input UserUpdateInput {
+  comments: CommentUpdateManyWithoutUserInput
   createdAt: DateTimeFieldUpdateOperationsInput
+  doImage: Json
   email: StringFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
   loginTokens: LoginTokenUpdateManyWithoutUserInput
   name: NullableStringFieldUpdateOperationsInput
   password: NullableStringFieldUpdateOperationsInput
@@ -1487,10 +3295,20 @@ input UserUpdateInput {
 
 input UserUpdateManyMutationInput {
   createdAt: DateTimeFieldUpdateOperationsInput
+  doImage: Json
   email: StringFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
   name: NullableStringFieldUpdateOperationsInput
   password: NullableStringFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input UserUpdateOneRequiredWithoutCommentsInput {
+  connect: UserWhereUniqueInput
+  connectOrCreate: UserCreateOrConnectWithoutCommentsInput
+  create: UserUncheckedCreateWithoutCommentsInput
+  update: UserUncheckedUpdateWithoutCommentsInput
+  upsert: UserUpsertWithoutCommentsInput
 }
 
 input UserUpdateOneRequiredWithoutLoginTokensInput {
@@ -1509,9 +3327,24 @@ input UserUpdateOneRequiredWithoutRefreshTokensInput {
   upsert: UserUpsertWithoutRefreshTokensInput
 }
 
-input UserUpdateWithoutLoginTokensInput {
+input UserUpdateWithoutCommentsInput {
   createdAt: DateTimeFieldUpdateOperationsInput
+  doImage: Json
   email: StringFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  loginTokens: LoginTokenUpdateManyWithoutUserInput
+  name: NullableStringFieldUpdateOperationsInput
+  password: NullableStringFieldUpdateOperationsInput
+  refreshTokens: RefreshTokenUpdateManyWithoutUserInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input UserUpdateWithoutLoginTokensInput {
+  comments: CommentUpdateManyWithoutUserInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  doImage: Json
+  email: StringFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
   name: NullableStringFieldUpdateOperationsInput
   password: NullableStringFieldUpdateOperationsInput
   refreshTokens: RefreshTokenUpdateManyWithoutUserInput
@@ -1519,12 +3352,20 @@ input UserUpdateWithoutLoginTokensInput {
 }
 
 input UserUpdateWithoutRefreshTokensInput {
+  comments: CommentUpdateManyWithoutUserInput
   createdAt: DateTimeFieldUpdateOperationsInput
+  doImage: Json
   email: StringFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
   loginTokens: LoginTokenUpdateManyWithoutUserInput
   name: NullableStringFieldUpdateOperationsInput
   password: NullableStringFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input UserUpsertWithoutCommentsInput {
+  create: UserUncheckedCreateWithoutCommentsInput!
+  update: UserUncheckedUpdateWithoutCommentsInput!
 }
 
 input UserUpsertWithoutLoginTokensInput {
@@ -1541,9 +3382,11 @@ input UserWhereInput {
   AND: [UserWhereInput]
   NOT: [UserWhereInput]
   OR: [UserWhereInput]
+  comments: CommentListRelationFilter
   createdAt: DateTimeFilter
+  doImage: JsonNullableFilter
   email: StringFilter
-  id: IntFilter
+  id: StringFilter
   loginTokens: LoginTokenListRelationFilter
   name: StringNullableFilter
   password: StringNullableFilter
@@ -1553,5 +3396,5 @@ input UserWhereInput {
 
 input UserWhereUniqueInput {
   email: String
-  id: Int
+  id: String
 }

@@ -27,7 +27,6 @@ const SkeletonLoad = (
 export default function Kanban() {
   const dispatch = useDispatch();
   const { board } = useSelector((state: RootState) => state.kanban);
-
   useEffect(() => {
     dispatch(getBoard());
   }, [dispatch]);
@@ -38,8 +37,7 @@ export default function Kanban() {
 
     if (!destination) return;
 
-    if (destination.droppableId === source.droppableId && destination.index === source.index)
-      return;
+    if (destination.droppableId === source.droppableId && destination.index === source.index) return;
 
     if (type === 'column') {
       const newColumnOrder = Array.from(board.columnOrder);
@@ -60,14 +58,14 @@ export default function Kanban() {
 
       const updatedColumn = {
         ...start,
-        cardIds: updatedCardIds
+        cardIds: updatedCardIds,
       };
 
       dispatch(
         persistCard({
           ...board.columns,
-          [updatedColumn.id]: updatedColumn
-        })
+          [updatedColumn.id]: updatedColumn,
+        }),
       );
       return;
     }
@@ -76,22 +74,22 @@ export default function Kanban() {
     startCardIds.splice(source.index, 1);
     const updatedStart = {
       ...start,
-      cardIds: startCardIds
+      cardIds: startCardIds,
     };
 
     const finishCardIds = [...finish.cardIds];
     finishCardIds.splice(destination.index, 0, draggableId);
     const updatedFinish = {
       ...finish,
-      cardIds: finishCardIds
+      cardIds: finishCardIds,
     };
 
     dispatch(
       persistCard({
         ...board.columns,
         [updatedStart.id]: updatedStart,
-        [updatedFinish.id]: updatedFinish
-      })
+        [updatedFinish.id]: updatedFinish,
+      }),
     );
   };
 
@@ -103,9 +101,9 @@ export default function Kanban() {
           links={[
             {
               name: 'Dashboard',
-              href: PATH_DASHBOARD.root
+              href: PATH_DASHBOARD.root,
             },
-            { name: 'Kanban' }
+            { name: 'Kanban' },
           ]}
         />
         <DragDropContext onDragEnd={onDragEnd}>
@@ -121,10 +119,12 @@ export default function Kanban() {
               >
                 {board?.columnOrder?.map((columnId, index) => {
                   const column = board.columns[columnId];
+                  console.log(column);
+
                   return <KanbanColumn index={index} key={columnId} column={column} />;
                 })}
 
-                {!board?.columnOrder.length && SkeletonLoad}
+                {!board && SkeletonLoad}
 
                 {provided.placeholder}
                 <KanbanColumnAdd />

@@ -8,151 +8,18 @@ import { CardComment, KanbanCard, KanbanBoard, KanbanColumn } from '@types/kanba
 import { dispatch } from '../store';
 import { mockImgAvatar, mockImgFeed } from 'utils/mockImages';
 // ----------------------------------------------------------------------
-
-const now = new Date();
-
-const columnIds = {
-  column1: '8cd887ec-b3bc-11eb-8529-0242ac130003',
-  column2: '23008a1f-ad94-4771-b85c-3566755afab7',
-  column3: '37a9a747-f732-4587-a866-88d51c037641',
-  column4: '4ac3cd37-b3e1-466a-8e3b-d7d88f6f5d4f',
-};
-
-const cardIds = {
-  card1: 'deb02f04-9cf8-4f1e-97e0-2fbda84cc6b3',
-  card2: '98bf6e8b-becc-485b-9c3f-a7d09392c48d',
-  card3: '99fbc02c-de89-4be3-9515-f8bd12227d38',
-  card4: 'ab9cebca-6cb4-4847-aa17-3b261b3dd0fb',
-  card5: 'ebf0d26a-78e5-414f-986f-003d8fcd3154',
-  card6: '9d98ce30-3c51-4de3-8537-7a4b663ee3af',
-  card7: '0f71fb1f-9fce-419c-a525-46aeeb9b3e83',
-  card8: '534fac32-cae1-4d77-965a-062d2114bc29',
-  card9: 'dc0fa705-1740-46a4-a3ec-5c6d67b6f402',
-  card10: '5b323625-c53b-4d06-86df-b59e180657a0',
-};
-
-const memberIds = {
-  member1: '473d2720-341c-49bf-94ed-556999cf6ef7',
-  member2: 'b8395203-887c-46f5-a85f-339b2d75c98b',
-  member3: '048f6343-7a65-4873-a570-eb6ff4eb1ba3',
-  member4: '18e23ac9-c874-43e4-8163-2d37f15f3367',
-  member5: 'a3be5485-03bf-47a6-b553-a9cf9f070ed8',
-};
-
-const COMMENTS: CardComment[] = [...Array(8)].map((_, index) => {
-  const setIndex = index + 1;
-  return {
-    id: faker.datatype.uuid(),
-    avatar: mockImgAvatar(setIndex),
-    name: faker.name.findName(),
-    createdAt: faker.date.past(),
-    messageType: setIndex === 3 || setIndex === 5 ? 'image' : 'text',
-    message: (setIndex === 3 && mockImgFeed(6)) || (setIndex === 5 && mockImgFeed(8)) || faker.lorem.sentence(),
-  };
-});
-// ----------------------------------------------------------------------
-
-const cardList: KanbanCard[] = [
-  {
-    id: cardIds.card1,
-    name: 'Call with sales of HubSpot',
-    description:
-      'Duis condimentum lacus finibus felis pellentesque, ac auctor nibh fermentum. Duis sed dui ante. Phasellus id eros tincidunt, dictum lorem vitae, pellentesque sem. Aenean eu enim sit amet mauris rhoncus mollis. Sed enim turpis, porta a felis et, luctus faucibus nisi. Phasellus et metus fermentum, ultrices arcu aliquam, facilisis justo. Cras nunc nunc, elementum sed euismod ut, maximus eget nibh. Phasellus condimentum lorem neque. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Fusce sagittis pharetra eleifend. Suspendisse potenti.',
-    assignee: [{ id: memberIds.member1, avatar: mockImgAvatar(1), name: faker.name.findName() }],
-    due: [addDays(now, 6).getTime(), addDays(now, 7).getTime()],
-    attachments: [],
-    comments: COMMENTS,
-    completed: true,
-  },
-  {
-    id: cardIds.card2,
-    name: 'Interview for the Asis. Sales Manager',
-    description: 'We are looking for vue experience and of course node js strong knowledge',
-    assignee: [
-      { id: memberIds.member1, avatar: mockImgAvatar(1), name: faker.name.findName() },
-      { id: memberIds.member2, avatar: mockImgAvatar(2), name: faker.name.findName() },
-      { id: memberIds.member4, avatar: mockImgAvatar(3), name: faker.name.findName() },
-      { id: memberIds.member5, avatar: mockImgAvatar(4), name: faker.name.findName() },
-      { id: memberIds.member3, avatar: mockImgAvatar(5), name: faker.name.findName() },
-    ],
-    due: [addDays(now, 6).getTime(), addDays(now, 7).getTime()],
-    attachments: [mockImgFeed(1)],
-    comments: [],
-    completed: false,
-  },
-  {
-    id: cardIds.card3,
-    name: 'Change the height of the top bar because it looks too chunky',
-    description: 'We nede to make it aggressive with pricing because it’s in their interest to acquire us',
-    assignee: [],
-    due: [null, null],
-    attachments: [],
-    comments: [],
-    completed: true,
-  },
-  {
-    id: cardIds.card4,
-    name: 'Integrate Stripe API',
-    description: 'We nede to make it aggresive with pricing because it’s in their interest to acquire us',
-    assignee: [
-      { id: memberIds.member2, avatar: mockImgAvatar(2), name: faker.name.findName() },
-      { id: memberIds.member5, avatar: mockImgAvatar(5), name: faker.name.findName() },
-    ],
-    due: [null, null],
-    attachments: [mockImgFeed(3)],
-    comments: [],
-    completed: false,
-  },
-  {
-    id: cardIds.card5,
-    name: 'Update the customer API for payments',
-    description: 'We need to make it aggresive with pricing because it’s in their interest to acquire us',
-    assignee: [{ id: memberIds.member1, avatar: mockImgAvatar(1), name: faker.name.findName() }],
-    due: [null, null],
-    attachments: [],
-    comments: [],
-    completed: true,
-  },
-  {
-    id: cardIds.card6,
-    name: 'Release minimals DS',
-    description: 'Production',
-    assignee: [{ id: memberIds.member1, avatar: mockImgAvatar(1), name: faker.name.findName() }],
-    due: [null, null],
-    attachments: [],
-    comments: [],
-    completed: true,
-  },
-];
-
-const columnList: KanbanColumn[] = [
-  {
-    id: columnIds.column1,
-    name: 'Backlog',
-    cardIds: [cardIds.card1, cardIds.card2, cardIds.card3],
-  },
-  {
-    id: columnIds.column2,
-    name: 'Progress',
-    cardIds: [cardIds.card4, cardIds.card5],
-  },
-  {
-    id: columnIds.column3,
-    name: 'Q&A',
-    cardIds: [],
-  },
-  {
-    id: columnIds.column4,
-    name: 'Production',
-    cardIds: [cardIds.card6],
-  },
-];
-
-const board: KanbanBoard = {
-  cards: cardList,
-  columns: columnList,
-  columnOrder: [columnIds.column1, columnIds.column2, columnIds.column3, columnIds.column4],
-};
+import { request, gql } from 'graphql-request';
+import {
+  CreateOneStoryDocument,
+  CreateOneItemDocument,
+  UpdateOneStoryDocument,
+  DeleteOneStoryDocument,
+  FindManyRequestDocument,
+  UpdateOneCollectionDocument,
+  DeleteOneItemDocument,
+  FindUniqueStoryDocument,
+  FindUniqueCollectionDocument,
+} from 'generated';
 
 // ----------------------------------------------------------------------
 
@@ -280,6 +147,77 @@ export function getBoard() {
     try {
       // const response = await axios.get('/api/kanban/board');
       // dispatch(slice.actions.getBoardSuccess(response.data.board));
+      const FindUniqueCollectionWithStoriesAndItems = gql`
+        query findUniqueCollection($where: CollectionWhereUniqueInput!) {
+          findUniqueCollection(where: $where) {
+            id
+            name
+            description
+            doImage
+            storyOrder
+            stories {
+              id
+              name
+              description
+              doImage
+              itemIds
+              requests {
+                id
+                name
+                comments {
+                  user {
+                    id
+                    name
+                    doImage
+                  }
+                  message
+                  messageType
+                }
+              }
+              items {
+                id
+                name
+                description
+                doImage
+              }
+            }
+          }
+        }
+      `;
+
+      const data = await request('/api/graphql', FindUniqueCollectionWithStoriesAndItems, {
+        where: {
+          id: '1',
+        },
+      });
+      const collection = data.findUniqueCollection;
+
+      const board: KanbanBoard = {
+        cards: collection.stories
+          .reduce((previous, current) => {
+            return [...previous, ...current.items];
+          }, [])
+          .map((item) => {
+            return {
+              id: item.id,
+              name: item.name,
+              description: item.description,
+              assignee: [],
+              due: [],
+              attachments: [],
+              comments: [],
+              completed: true,
+              ...item,
+            };
+          }),
+        columns: collection.stories.map((story) => {
+          return {
+            ...story,
+            cardIds: story.itemIds ? story.itemIds : [],
+          };
+        }),
+        columnOrder: collection.storyOrder ? collection.storyOrder : [],
+      };
       dispatch(slice.actions.getBoardSuccess(board));
     } catch (error) {
       dispatch(slice.actions.hasError(error));
@@ -293,13 +231,44 @@ export function createColumn(newColumn: { name: string }) {
   return async () => {
     dispatch(slice.actions.startLoading());
     try {
+      // const column = {
+      //   id: faker.datatype.uuid(),
+      //   name,
+      //   cardIds: [],
+      // };
+      // board.columns.push(column);
+      // board.columnOrder.push(column.id);
+
+      const newStory = await request('/api/graphql', CreateOneStoryDocument, {
+        data: {
+          name: newColumn.name,
+          collection: {
+            connect: {
+              id: '1',
+            },
+          },
+        },
+      });
+
+      const collection = await request('/api/graphql', FindUniqueCollectionDocument, {
+        where: {
+          id: '1',
+        },
+      });
+
+      const updateCollection = await request('/api/graphql', UpdateOneCollectionDocument, {
+        where: {
+          id: '1',
+        },
+        data: {
+          storyOrder: [...collection.findUniqueCollection.storyOrder, newStory?.createOneStory?.id],
+        },
+      });
+
       const column = {
-        id: faker.datatype.uuid(),
-        name,
+        ...newStory.createOneStory,
         cardIds: [],
       };
-      board.columns.push(column);
-      board.columnOrder.push(column.id);
       dispatch(slice.actions.createColumnSuccess(column));
     } catch (error) {
       dispatch(slice.actions.hasError(error));
@@ -313,14 +282,27 @@ export function updateColumn(columnId: string, updateColumn: KanbanColumn) {
   return async () => {
     dispatch(slice.actions.startLoading());
     try {
-      const columnIndex = board.columns.findIndex((column) => column.id === columnId);
+      // const columnIndex = board.columns.findIndex((column) => column.id === columnId);
 
-      board.columns[columnIndex] = {
-        ...board.columns[columnIndex],
-        ...updateColumn,
+      // board.columns[columnIndex] = {
+      //   ...board.columns[columnIndex],
+      //   ...updateColumn,
+      // };
+
+      const updateStoryData = await request('/api/graphql', UpdateOneStoryDocument, {
+        where: {
+          id: columnId,
+        },
+        data: {
+          name: { set: updateColumn.name },
+        },
+      });
+      const column = {
+        cardIds: updateStoryData.updateOneStory.itemIds,
+        ...updateStoryData.updateOneStory,
       };
 
-      dispatch(slice.actions.updateColumnSuccess(board.columns[columnIndex]));
+      dispatch(slice.actions.updateColumnSuccess(column));
     } catch (error) {
       dispatch(slice.actions.hasError(error));
     }
@@ -333,17 +315,53 @@ export function deleteColumn(columnId: string) {
   return async () => {
     dispatch(slice.actions.startLoading());
     try {
-      const column = board.columns.find((c) => c.id === columnId);
+      const data = await request('/api/graphql', FindManyRequestDocument, {
+        where: {
+          story: {
+            id: {
+              equals: columnId,
+            },
+          },
+        },
+      });
 
-      if (column) {
-        board.cards = board.cards.filter((card) => !column.cardIds.includes(card.id));
+      const unFinishedRequest = data.findManyRequest.filter((request) => request.endDate > Date.now());
+
+      if (unFinishedRequest.length === 0) {
+        const deleteStory = await request('/api/graphql', DeleteOneStoryDocument, {
+          where: {
+            id: columnId,
+          },
+        });
+        const collection = await request('/api/graphql', FindUniqueCollectionDocument, {
+          where: {
+            id: '1',
+          },
+        });
+
+        const updateCollection = await request('/api/graphql', UpdateOneCollectionDocument, {
+          where: {
+            id: '1',
+          },
+          data: {
+            storyOrder: collection.findUniqueCollection.storyOrder.filter(
+              (storyId) => storyId != deleteStory.deleteOneStory.id,
+            ),
+          },
+        });
+        dispatch(slice.actions.deleteColumnSuccess({ columnId }));
       }
 
-      board.columns = board.columns.filter((id) => id !== columnId);
-      board.columnOrder = board.columnOrder.filter((id) => id !== columnId);
+      // const column = board.columns.find((c) => c.id === columnId);
+
+      // if (column) {
+      //   board.cards = board.cards.filter((card) => !column.cardIds.includes(card.id));
+      // }
+
+      // board.columns = board.columns.filter((id) => id !== columnId);
+      // board.columnOrder = board.columnOrder.filter((id) => id !== columnId);
 
       // await axios.post('/api/kanban/columns/delete', { columnId });
-      dispatch(slice.actions.deleteColumnSuccess({ columnId }));
     } catch (error) {
       dispatch(slice.actions.hasError(error));
     }
@@ -353,7 +371,15 @@ export function deleteColumn(columnId: string) {
 // ----------------------------------------------------------------------
 
 export function persistColumn(newColumnOrder: string[]) {
-  return () => {
+  return async () => {
+    const collectionData = await request('/api/graphql', UpdateOneCollectionDocument, {
+      where: {
+        id: '1',
+      },
+      data: {
+        storyOrder: newColumnOrder,
+      },
+    });
     dispatch(slice.actions.persistColumn(newColumnOrder));
   };
 }
@@ -361,7 +387,60 @@ export function persistColumn(newColumnOrder: string[]) {
 // ----------------------------------------------------------------------
 
 export function persistCard(columns: Record<string, KanbanColumn>) {
-  return () => {
+  return async () => {
+    Object.keys(columns).forEach(async (storyId) => {
+      const FindUniqueStoryWithItems = gql`
+        query findUniqueStory($where: StoryWhereUniqueInput!) {
+          findUniqueStory(where: $where) {
+            id
+            name
+            doImage
+            items {
+              id
+              name
+            }
+          }
+        }
+      `;
+      const storyData = await request('/api/graphql', FindUniqueStoryWithItems, {
+        where: {
+          id: storyId,
+        },
+      });
+
+      const deleteStoryItems = await request('/api/graphql', UpdateOneStoryDocument, {
+        where: {
+          id: storyId,
+        },
+        data: {
+          itemIds: [],
+          items: {
+            disconnect: storyData.findUniqueStory.items.map((item) => {
+              return {
+                id: item.id
+              }
+            }),
+          },
+        },
+      });
+
+      const addStoryItems = await request('/api/graphql', UpdateOneStoryDocument, {
+        where: {
+          id: storyId,
+        },
+        data: {
+          itemIds: columns[storyId].cardIds,
+          items: {
+            connect: columns[storyId].cardIds.map((cardId) => {
+              return {
+                id: cardId
+              }
+            })
+          }
+        },
+      });
+    });
+
     dispatch(slice.actions.persistCard(columns));
   };
 }
@@ -369,15 +448,56 @@ export function persistCard(columns: Record<string, KanbanColumn>) {
 // ----------------------------------------------------------------------
 
 export function addTask({ card, columnId }: { card: Partial<KanbanCard>; columnId: string }) {
-  return () => {
-    dispatch(slice.actions.addTask({ card, columnId }));
+  return async () => {
+    const newItem = await request('/api/graphql', CreateOneItemDocument, {
+      data: {
+        name: card.name,
+        stories: {
+          connect: {
+            id: columnId,
+          },
+        },
+      },
+    });
+    const story = await request('/api/graphql', FindUniqueStoryDocument, {
+      where: {
+        id: columnId,
+      },
+    });
+    const updateStory = await request('/api/graphql', UpdateOneStoryDocument, {
+      where: {
+        id: columnId,
+      },
+      data: {
+        itemIds: [...story.findUniqueStory.itemIds, newItem.createOneItem.id],
+      },
+    });
+    dispatch(slice.actions.addTask({ card: { ...card, id: newItem.createOneItem.id }, columnId }));
   };
 }
 
 // ----------------------------------------------------------------------
 
 export function deleteTask({ cardId, columnId }: { cardId: string; columnId: string }) {
-  return () => {
+  return async () => {
+    const deleteItem = await request('/api/graphql', DeleteOneItemDocument, {
+      where: {
+        id: cardId,
+      },
+    });
+    const story = await request('/api/graphql', FindUniqueStoryDocument, {
+      where: {
+        id: columnId,
+      },
+    });
+    const updateStory = await request('/api/graphql', UpdateOneStoryDocument, {
+      where: {
+        id: columnId,
+      },
+      data: {
+        itemIds: story.findUniqueStory.itemIds.filter((itemId) => itemId != deleteItem.id),
+      },
+    });
     dispatch(slice.actions.deleteTask({ cardId, columnId }));
   };
 }

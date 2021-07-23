@@ -1,0 +1,73 @@
+fragment StoryFields on Story {
+  id
+  name
+  description
+  doImage
+  collectionId
+  itemIds
+}
+
+fragment Story on Story {
+  ...StoryFields
+  collection {
+    ...CollectionFields
+  }
+}
+
+query findUniqueStory($where: StoryWhereUniqueInput!) {
+  findUniqueStory(where: $where) {
+    ...Story
+  }
+}
+
+query findManyStory(
+  $where: StoryWhereInput
+  $orderBy: [StoryOrderByInput!]
+  $cursor: StoryWhereUniqueInput
+  $skip: Int
+  $take: Int
+) {
+  findManyStory(where: $where, orderBy: $orderBy, cursor: $cursor, skip: $skip, take: $take) {
+    ...Story
+  }
+}
+
+query findManyStoryCount(
+  $where: StoryWhereInput
+  $orderBy: [StoryOrderByInput!]
+  $cursor: StoryWhereUniqueInput
+  $skip: Int
+  $take: Int
+) {
+  findManyStoryCount(where: $where, orderBy: $orderBy, cursor: $cursor, skip: $skip, take: $take)
+}
+
+mutation createOneStory($data: StoryCreateInput!) {
+  createOneStory(data: $data) {
+    ...Story
+  }
+}
+
+mutation updateOneStory($where: StoryWhereUniqueInput!, $data: StoryUpdateInput!) {
+  updateOneStory(where: $where, data: $data) {
+    ...Story
+  }
+}
+
+mutation deleteOneStory($where: StoryWhereUniqueInput!) {
+  deleteOneStory(where: $where) {
+    ...Story
+  }
+}
+
+mutation deleteManyStory($where: StoryWhereInput) {
+  deleteManyStory(where: $where) {
+    count
+  }
+}
+
+mutation updateManyStory($where: StoryWhereInput, $data: StoryUpdateManyMutationInput!) {
+  updateManyStory(where: $where, data: $data) {
+    count
+  }
+}

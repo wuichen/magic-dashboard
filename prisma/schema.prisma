@@ -9,20 +9,22 @@ datasource db {
 }
 
 model User {
-  id            Int            @id @default(autoincrement())
+  id            String         @id @default(cuid())
   email         String         @unique
   name          String?
+  doImage       Json?
   password      String?
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
   refreshTokens RefreshToken[]
   loginTokens   LoginToken[]
+  comments      Comment[]
 }
 
 model LoginToken {
-  id           Int      @id @default(autoincrement())
+  id           String   @id @default(cuid())
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  userId       Int
+  userId       String
   approved     Boolean  @default(false)
   expires      DateTime
   createdAt    DateTime @default(now())
@@ -36,9 +38,9 @@ model LoginToken {
 }
 
 model RefreshToken {
-  loginTokenId Int      @id
+  loginTokenId String   @id
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  userId       Int
+  userId       String
   createdAt    DateTime @default(now())
   expires      DateTime
   value        String
@@ -50,22 +52,56 @@ model RefreshToken {
 }
 
 model Collection {
-  id          Int    @id @default(autoincrement())
+  id          String   @id @default(cuid())
   name        String
-  description String
+  description String?
   doImage     Json?
+  stories     Story[]
+  storyOrder  String[]
 }
 
 model Story {
-  id          Int    @id @default(autoincrement())
-  name        String
-  description String
-  doImage     Json?
+  id           String     @id @default(cuid())
+  name         String
+  description  String?
+  doImage      Json?
+  collection   Collection @relation(fields: [collectionId], references: [id])
+  collectionId String
+  items        Item[]
+  requests     Request[]
+  itemIds      String[]
 }
 
 model Item {
-  id          Int    @id @default(autoincrement())
+  id          String  @id @default(cuid())
   name        String
-  description String
+  description String?
   doImage     Json?
+  stories     Story[]
+}
+
+model Request {
+  id        String    @id @default(cuid())
+  name      String
+  story     Story     @relation(fields: [storyId], references: [id])
+  storyId   String
+  startDate DateTime?
+  endDate   DateTime?
+  comments  Comment[]
+}
+
+model Comment {
+  id          String      @id @default(cuid())
+  user        User        @relation(fields: [userId], references: [id])
+  userId      String
+  request     Request     @relation(fields: [requestId], references: [id])
+  requestId   String
+  messageType MessageType
+  message     String
+  createdAt   DateTime?   @default(now())
+}
+
+enum MessageType {
+  image
+  text
 }

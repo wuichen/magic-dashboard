@@ -1,0 +1,76 @@
+fragment CommentFields on Comment {
+  id
+  userId
+  requestId
+  messageType
+  message
+  createdAt
+}
+
+fragment Comment on Comment {
+  ...CommentFields
+  user {
+    ...UserFields
+  }
+  request {
+    ...RequestFields
+  }
+}
+
+query findUniqueComment($where: CommentWhereUniqueInput!) {
+  findUniqueComment(where: $where) {
+    ...Comment
+  }
+}
+
+query findManyComment(
+  $where: CommentWhereInput
+  $orderBy: [CommentOrderByInput!]
+  $cursor: CommentWhereUniqueInput
+  $skip: Int
+  $take: Int
+) {
+  findManyComment(where: $where, orderBy: $orderBy, cursor: $cursor, skip: $skip, take: $take) {
+    ...Comment
+  }
+}
+
+query findManyCommentCount(
+  $where: CommentWhereInput
+  $orderBy: [CommentOrderByInput!]
+  $cursor: CommentWhereUniqueInput
+  $skip: Int
+  $take: Int
+) {
+  findManyCommentCount(where: $where, orderBy: $orderBy, cursor: $cursor, skip: $skip, take: $take)
+}
+
+mutation createOneComment($data: CommentCreateInput!) {
+  createOneComment(data: $data) {
+    ...Comment
+  }
+}
+
+mutation updateOneComment($where: CommentWhereUniqueInput!, $data: CommentUpdateInput!) {
+  updateOneComment(where: $where, data: $data) {
+    ...Comment
+  }
+}
+
+mutation deleteOneComment($where: CommentWhereUniqueInput!) {
+  deleteOneComment(where: $where) {
+    ...Comment
+  }
+}
+
+mutation deleteManyComment($where: CommentWhereInput) {
+  deleteManyComment(where: $where) {
+    count
+  }
+}
+
+mutation updateManyComment($where: CommentWhereInput, $data: CommentUpdateManyMutationInput!) {
+  updateManyComment(where: $where, data: $data) {
+    count
+  }
+}

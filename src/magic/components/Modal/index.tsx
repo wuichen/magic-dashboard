@@ -31,7 +31,7 @@ export function ModalContextProvider({ children }) {
     close,
   };
 
-  if (process.browser && __DEV__) {
+  if (process.browser && process.env.NODE_ENV === 'development') {
     if (!window.__magic) window.__magic = {};
     window.__magic.ModalContext = value;
     // e.g. __magic.ModalContext.open(() => 'Hi')

@@ -1,0 +1,69 @@
+fragment CollectionFields on Collection {
+  id
+  name
+  description
+  doImage
+  storyOrder
+}
+
+fragment Collection on Collection {
+  ...CollectionFields
+}
+
+query findUniqueCollection($where: CollectionWhereUniqueInput!) {
+  findUniqueCollection(where: $where) {
+    ...Collection
+  }
+}
+
+query findManyCollection(
+  $where: CollectionWhereInput
+  $orderBy: [CollectionOrderByInput!]
+  $cursor: CollectionWhereUniqueInput
+  $skip: Int
+  $take: Int
+) {
+  findManyCollection(where: $where, orderBy: $orderBy, cursor: $cursor, skip: $skip, take: $take) {
+    ...Collection
+  }
+}
+
+query findManyCollectionCount(
+  $where: CollectionWhereInput
+  $orderBy: [CollectionOrderByInput!]
+  $cursor: CollectionWhereUniqueInput
+  $skip: Int
+  $take: Int
+) {
+  findManyCollectionCount(where: $where, orderBy: $orderBy, cursor: $cursor, skip: $skip, take: $take)
+}
+
+mutation createOneCollection($data: CollectionCreateInput!) {
+  createOneCollection(data: $data) {
+    ...Collection
+  }
+}
+
+mutation updateOneCollection($where: CollectionWhereUniqueInput!, $data: CollectionUpdateInput!) {
+  updateOneCollection(where: $where, data: $data) {
+    ...Collection
+  }
+}
+
+mutation deleteOneCollection($where: CollectionWhereUniqueInput!) {
+  deleteOneCollection(where: $where) {
+    ...Collection
+  }
+}
+
+mutation deleteManyCollection($where: CollectionWhereInput) {
+  deleteManyCollection(where: $where) {
+    count
+  }
+}
+
+mutation updateManyCollection($where: CollectionWhereInput, $data: CollectionUpdateManyMutationInput!) {
+  updateManyCollection(where: $where, data: $data) {
+    count
+  }
+}

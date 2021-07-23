@@ -2,6 +2,8 @@ fragment UserFields on User {
   id
   email
   name
+  doImage
+  password
   createdAt
   updatedAt
 }

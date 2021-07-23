@@ -8,7 +8,7 @@
     "build": "next build",
     "start": "next start",
     "setup": "export MAXMIND_LICENSE_KEY=J9pnzp1EftxnURXn && yarn install",
-    "generate": "pal g && yarn generate:prisma && yarn generate:nexus && yarn codegen",
+    "generate": "yarn remove:old && pal g && yarn generate:prisma && yarn generate:nexus && yarn codegen",
     "generate:prisma": "prisma generate",
     "generate:nexus": "yarn ts-node --transpile-only src/server/nexusSchema",
     "codegen": "graphql-codegen --config codegen.yml",
@@ -17,9 +17,11 @@
     "db-reset": "prisma migrate reset",
     "db-seed": "prisma db seed --preview-feature",
     "studio": "prisma studio",
-    "ts-node": "ts-node -r tsconfig-paths/register --compiler-options '{\"module\":\"CommonJS\"}'"
+    "ts-node": "ts-node -r tsconfig-paths/register --compiler-options '{\"module\":\"CommonJS\"}'",
+    "remove:old": "yarn ts-node --transpile-only scripts/remove-old"
   },
   "dependencies": {
+    "graphql-type-json": "^0.3.2",
     "react-dropzone": "^11.3.4",
     "react-image-lightbox": "^5.1.4",
     "@reduxjs/toolkit": "^1.6.1",
