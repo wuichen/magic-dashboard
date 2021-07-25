@@ -232,6 +232,7 @@ export function AuthProvider({ children }) {
     ...state,
     init: init || !!state.jwt,
     isLoggedIn,
+    isMagic: true,
     actions: {
       logout,
       login,
